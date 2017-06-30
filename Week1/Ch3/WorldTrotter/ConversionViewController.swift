@@ -10,6 +10,31 @@ import UIKit
 
 class ConversionViewController: UIViewController, UITextFieldDelegate {
     
+    override func viewDidLoad() {
+        // superDML viewDidLoad 구현을 항상 호출한다
+        super.viewDidLoad()
+        
+        print("ConversionViewController loaded its view.")
+    }
+    
+    /* pg.108 은메달 과제: 다크 모드 수행 */
+    override func viewWillAppear(_ animated: Bool) {
+        let view = self.view
+        var currentTime = String()
+        let nowDate = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HH"
+        dateFormatter.locale = Locale(identifier: "ko_KR")
+        currentTime = dateFormatter.string(from: nowDate)
+        
+        if (Int(currentTime)! < 6) || (Int(currentTime)! > 18) {
+            view?.backgroundColor = UIColor.darkGray
+        }
+        else {
+            view?.backgroundColor = UIColor.cyan
+        }
+    }
+    
     @IBOutlet var celsiusLabel: UILabel!
     
     var fahrenheitValue: Double? {
