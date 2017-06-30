@@ -9,10 +9,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Conversion View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="WorldTrotter" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ConversionViewController" customModule="WorldTrotter" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -29,6 +29,9 @@
                                 <color key="textColor" red="0.88235294119999996" green="0.34509803919999998" blue="0.16078431369999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="70"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="decimalPad"/>
+                                <connections>
+                                    <action selector="fahrehheitFieldEditingChangedWithTextField:" destination="BYZ-38-t0r" eventType="editingChanged" id="zK4-ba-o6G"/>
+                                </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="degrees Fahrenheit" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MNo-Bx-72H">
                                 <rect key="frame" x="34" y="120" width="306" height="43"/>
@@ -56,6 +59,7 @@
                             </label>
                         </subviews>
                         <color key="backgroundColor" red="0.96078431372549022" green="0.95686274509803915" blue="0.94509803921568625" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="eKC-6k-vRS" firstAttribute="top" secondItem="MNo-Bx-72H" secondAttribute="bottom" constant="8" id="36g-7d-e59"/>
                             <constraint firstItem="MNo-Bx-72H" firstAttribute="top" secondItem="PQJ-E1-naq" secondAttribute="bottom" constant="8" id="5sV-mc-Ae4"/>
@@ -68,9 +72,21 @@
                             <constraint firstItem="eKC-6k-vRS" firstAttribute="centerX" secondItem="MNo-Bx-72H" secondAttribute="centerX" id="dcE-Ao-xrq"/>
                             <constraint firstItem="Efk-ag-dQW" firstAttribute="centerX" secondItem="MNo-Bx-72H" secondAttribute="centerX" id="zr2-6V-4DT"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="SNv-fu-B2Q" appends="YES" id="nBt-te-JSj"/>
+                        </connections>
                     </view>
+                    <connections>
+                        <outlet property="celsiusLabel" destination="RMP-UA-2q5" id="NGS-hV-CzA"/>
+                        <outlet property="textField" destination="PQJ-E1-naq" id="3mJ-3C-z5r"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="SNv-fu-B2Q">
+                    <connections>
+                        <action selector="dismissKeyboardWithSender:" destination="BYZ-38-t0r" id="GC7-s3-Gyc"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="136.80000000000001" y="138.98050974512745"/>
         </scene>
