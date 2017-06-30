@@ -31,6 +31,7 @@
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="decimalPad"/>
                                 <connections>
                                     <action selector="fahrehheitFieldEditingChangedWithTextField:" destination="BYZ-38-t0r" eventType="editingChanged" id="zK4-ba-o6G"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="Jdc-GQ-Z9x"/>
                                 </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="degrees Fahrenheit" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MNo-Bx-72H">
