@@ -11,6 +11,7 @@
 		7DCCFF071F06B525009AA0F3 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DCCFF061F06B525009AA0F3 /* MapKit.framework */; };
 		7DCCFF091F06B8CB009AA0F3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7DCCFF081F06B8CB009AA0F3 /* Assets.xcassets */; };
 		7DCCFF0B1F06BAA3009AA0F3 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DCCFF0A1F06BAA3009AA0F3 /* MapViewController.swift */; };
+		7DCCFF0D1F07680D009AA0F3 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DCCFF0C1F07680D009AA0F3 /* WebViewController.swift */; };
 		7DE604E31F0645B60011B1B7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DE604E21F0645B60011B1B7 /* AppDelegate.swift */; };
 		7DE604E81F0645B60011B1B7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7DE604E61F0645B60011B1B7 /* Main.storyboard */; };
 		7DE604ED1F0645B60011B1B7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7DE604EB1F0645B60011B1B7 /* LaunchScreen.storyboard */; };
@@ -21,6 +22,7 @@
 		7DCCFF061F06B525009AA0F3 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		7DCCFF081F06B8CB009AA0F3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7DCCFF0A1F06BAA3009AA0F3 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		7DCCFF0C1F07680D009AA0F3 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		7DE604DF1F0645B60011B1B7 /* WorldTrotter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WorldTrotter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7DE604E21F0645B60011B1B7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7DE604E71F0645B60011B1B7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -72,6 +74,7 @@
 				7DCCFF081F06B8CB009AA0F3 /* Assets.xcassets */,
 				7DE604E21F0645B60011B1B7 /* AppDelegate.swift */,
 				7DE604E61F0645B60011B1B7 /* Main.storyboard */,
+				7DCCFF0C1F07680D009AA0F3 /* WebViewController.swift */,
 				7DCCFF0A1F06BAA3009AA0F3 /* MapViewController.swift */,
 				7DE604EB1F0645B60011B1B7 /* LaunchScreen.storyboard */,
 				7DE604EE1F0645B60011B1B7 /* Info.plist */,
@@ -155,6 +158,7 @@
 				7DCCFF041F0668F2009AA0F3 /* ConversionViewController.swift in Sources */,
 				7DCCFF0B1F06BAA3009AA0F3 /* MapViewController.swift in Sources */,
 				7DE604E31F0645B60011B1B7 /* AppDelegate.swift in Sources */,
+				7DCCFF0D1F07680D009AA0F3 /* WebViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

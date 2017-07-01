@@ -114,11 +114,22 @@
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="zO3-n1-wG8"/>
                         <segue destination="k5Q-NI-sv8" kind="relationship" relationship="viewControllers" id="b2J-YB-Wfm"/>
+                        <segue destination="OZH-3p-92C" kind="relationship" relationship="viewControllers" id="U79-XE-LH7"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="s8k-ch-NZp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="892" y="24"/>
+        </scene>
+        <!--Item-->
+        <scene sceneID="9TZ-5J-xpl">
+            <objects>
+                <viewController id="OZH-3p-92C" customClass="WebViewController" customModule="WorldTrotter" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="scT-Re-LdS"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="e9p-Mf-EbK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="892" y="772"/>
         </scene>
     </scenes>
     <resources>

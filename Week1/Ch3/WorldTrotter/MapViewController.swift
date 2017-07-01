@@ -29,7 +29,10 @@ class MapViewController: UIViewController {
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(segmentedControl)
         
-        // segmentedControl 뷰를 상위 뷰의 위, leading, trailing이 같게 제약조건을 형성
+        /* 터치 타겟 설정 */
+        segmentedControl.addTarget(self, action: "mayTypeChanged", for: .valueChanged)
+        
+        /* segmentedControl 뷰를 상위 뷰의 위, leading, trailing이 같게 제약조건을 형성 */
         // 변경점 있음
         //let topConstraint = segmentedControl.topAnchor.constraint(equalTo: view.topAnchor)
         /* 상태바 밑에 오도록 topLayoutGuide의 bottomAnchor에 segmentedControl의 topAnchor를 맞춘다 */
@@ -46,7 +49,6 @@ class MapViewController: UIViewController {
         leadingConstraint.isActive = true
         trailingConstraint.isActive = true
         
-        
     }
     
     override func viewDidLoad() {
@@ -55,4 +57,16 @@ class MapViewController: UIViewController {
         print("MapViewController loaded its view")
     }
     
+    func mapTypeChanged(segControl: UISegmentedControl) {
+        switch segControl.selectedSegmentIndex {
+        case 0:
+            mapView.mapType = .standard
+        case 1:
+            mapView.mapType = .hybrid
+        case 2:
+            mapView.mapType = .satellite
+        default:
+            break
+        }
+    }
 }
