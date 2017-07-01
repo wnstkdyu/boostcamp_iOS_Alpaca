@@ -96,6 +96,14 @@
         <scene sceneID="dfm-oI-853">
             <objects>
                 <viewController id="k5Q-NI-sv8" customClass="MapViewController" customModule="WorldTrotter" customModuleProvider="target" sceneMemberID="viewController">
+                    <button key="view" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="8hy-Tk-T94">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <state key="normal" title="Button"/>
+                        <connections>
+                            <action selector="locateCurrentPositionWithSender:" destination="k5Q-NI-sv8" eventType="touchUpInside" id="Qi3-4X-xkW"/>
+                        </connections>
+                    </button>
                     <tabBarItem key="tabBarItem" title="Map" image="MapIcon" id="iag-v3-Teb"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vfl-MG-anb" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -108,6 +116,7 @@
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="8WG-7Q-ehb" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="qvU-eP-CiB">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>

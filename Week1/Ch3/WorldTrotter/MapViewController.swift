@@ -9,9 +9,10 @@
 import UIKit
 import MapKit
 
-class MapViewController: UIViewController {
+class MapViewController: UIViewController, MKMapViewDelegate {
     
     var mapView: MKMapView!
+    var button: UIButton!
     
     override func loadView() {
         // 지도 뷰 생성
@@ -29,8 +30,23 @@ class MapViewController: UIViewController {
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(segmentedControl)
         
+        let margins = view.layoutMarginsGuide
+        let locateButton = button
+        if let myButton = locateButton {
+            view.addSubview(myButton)
+            var buttonTitle = myButton.currentTitle
+            buttonTitle = "현재 위치"
+            let button_trailing = myButton.trailingAnchor.constraint(equalTo: margins.trailingAnchor)
+            let button_bottom = myButton.bottomAnchor.constraint(equalTo: bottomLayoutGuide.topAnchor)
+            button_trailing.isActive = true
+            button_bottom.isActive = true
+        }
+        
+        
+        
+        
         /* 터치 타겟 설정 */
-        segmentedControl.addTarget(self, action: "mayTypeChanged", for: .valueChanged)
+        segmentedControl.addTarget(self, action: Selector(("mapTypeChanged")), for: .valueChanged)
         
         /* segmentedControl 뷰를 상위 뷰의 위, leading, trailing이 같게 제약조건을 형성 */
         // 변경점 있음
@@ -41,7 +57,7 @@ class MapViewController: UIViewController {
         let leadingConstraint = segmentedControl.leadingAnchor.constraint(equalTo: view.leadingAnchor)
         let trailingConstraint = segmentedControl.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         */
-        let margins = view.layoutMarginsGuide
+        
         let leadingConstraint = segmentedControl.leadingAnchor.constraint(equalTo: margins.leadingAnchor)
         let trailingConstraint = segmentedControl.trailingAnchor.constraint(equalTo: margins.trailingAnchor)
         // 활성화
@@ -49,6 +65,13 @@ class MapViewController: UIViewController {
         leadingConstraint.isActive = true
         trailingConstraint.isActive = true
         
+    }
+    
+    func mapViewWillStartLocatingUser(_ mapView: MKMapView) {
+    }
+    
+    @IBAction func locateCurrentPosition(sender: AnyObject) {
+        mapViewWillStartLocatingUser(mapView)
     }
     
     override func viewDidLoad() {
