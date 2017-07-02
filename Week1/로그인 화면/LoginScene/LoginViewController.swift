@@ -13,7 +13,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var idTextField: UITextField!
     @IBOutlet weak var pwTextField: UITextField!
     
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         idTextField.delegate = self
@@ -33,7 +33,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         pwTextField.resignFirstResponder()
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
+        if textField == idTextField {
+            pwTextField.becomeFirstResponder()
+        } else {
+            textField.resignFirstResponder()
+        }
         return true
     }
     
@@ -43,7 +47,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         if let id = idTextField.text, let pw = pwTextField.text {
             print("ID: \(id), PW: \(pw)")
         }
-        
     }
     @IBAction func signUp(_ sender: Any) {
         print("touch up inside - sign up")
