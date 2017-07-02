@@ -16,6 +16,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        idTextField.delegate = self
+        pwTextField.delegate = self
         // Do any additional setup after loading the view, typically from a nib.
     }
 
@@ -24,10 +26,15 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-    // 키보드 내려주기
+    /* 키보드 내려주기 */
+    // 배경을 탭했을 때
     @IBAction func dismissKeyboard(_ sender: Any) {
         idTextField.resignFirstResponder()
         pwTextField.resignFirstResponder()
+    }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
     
     
@@ -40,9 +47,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     @IBAction func signUp(_ sender: Any) {
         print("touch up inside - sign up")
-        if let id = idTextField.text, let pw = pwTextField.text {
-            print("ID: \(id), PW: \(pw)")
-        }
     }
     
 
