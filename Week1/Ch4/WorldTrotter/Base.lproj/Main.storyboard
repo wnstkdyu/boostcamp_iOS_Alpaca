@@ -9,10 +9,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Conversion View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="WorldTrotter" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ConversionViewController" customModule="WorldTrotter" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -21,12 +21,19 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="212" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PbT-G0-x34">
-                                <rect key="frame" x="132" y="28" width="111" height="84"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="value" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PQJ-E1-naq">
+                                <rect key="frame" x="62" y="28" width="250" height="84"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="250" id="lgn-tg-PJB"/>
+                                </constraints>
+                                <color key="textColor" red="0.88235294119999996" green="0.34509803919999998" blue="0.16078431369999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="70"/>
-                                <color key="textColor" red="0.88235294117647056" green="0.34509803921568627" blue="0.16078431372549018" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="decimalPad"/>
+                                <connections>
+                                    <action selector="fahrehheitFieldEditingChangedWithTextField:" destination="BYZ-38-t0r" eventType="editingChanged" id="zK4-ba-o6G"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="Jdc-GQ-Z9x"/>
+                                </connections>
+                            </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="degrees Fahrenheit" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MNo-Bx-72H">
                                 <rect key="frame" x="34" y="120" width="306" height="43"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="36"/>
@@ -53,21 +60,34 @@
                             </label>
                         </subviews>
                         <color key="backgroundColor" red="0.96078431372549022" green="0.95686274509803915" blue="0.94509803921568625" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="PbT-G0-x34" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="0il-1z-95a"/>
                             <constraint firstItem="eKC-6k-vRS" firstAttribute="top" secondItem="MNo-Bx-72H" secondAttribute="bottom" constant="8" id="36g-7d-e59"/>
-                            <constraint firstItem="PbT-G0-x34" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="6My-R4-Bdm"/>
-                            <constraint firstItem="MNo-Bx-72H" firstAttribute="top" secondItem="PbT-G0-x34" secondAttribute="bottom" constant="8" id="8dj-NJ-tpy"/>
+                            <constraint firstItem="MNo-Bx-72H" firstAttribute="top" secondItem="PQJ-E1-naq" secondAttribute="bottom" constant="8" id="5sV-mc-Ae4"/>
+                            <constraint firstItem="PQJ-E1-naq" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="7Su-8X-nER"/>
+                            <constraint firstItem="PQJ-E1-naq" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="8LV-ua-X1F"/>
                             <constraint firstItem="Efk-ag-dQW" firstAttribute="top" secondItem="RMP-UA-2q5" secondAttribute="bottom" constant="8" id="GC4-5E-RVj"/>
+                            <constraint firstItem="MNo-Bx-72H" firstAttribute="centerX" secondItem="PQJ-E1-naq" secondAttribute="centerX" id="Mk8-ys-tiD"/>
                             <constraint firstItem="RMP-UA-2q5" firstAttribute="top" secondItem="eKC-6k-vRS" secondAttribute="bottom" constant="8" id="N9h-hH-GMc"/>
                             <constraint firstItem="RMP-UA-2q5" firstAttribute="centerX" secondItem="MNo-Bx-72H" secondAttribute="centerX" id="QiN-3E-9Vi"/>
                             <constraint firstItem="eKC-6k-vRS" firstAttribute="centerX" secondItem="MNo-Bx-72H" secondAttribute="centerX" id="dcE-Ao-xrq"/>
-                            <constraint firstItem="PbT-G0-x34" firstAttribute="centerX" secondItem="MNo-Bx-72H" secondAttribute="centerX" id="qWW-Lx-tb8"/>
                             <constraint firstItem="Efk-ag-dQW" firstAttribute="centerX" secondItem="MNo-Bx-72H" secondAttribute="centerX" id="zr2-6V-4DT"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="SNv-fu-B2Q" appends="YES" id="nBt-te-JSj"/>
+                        </connections>
                     </view>
+                    <connections>
+                        <outlet property="celsiusLabel" destination="RMP-UA-2q5" id="NGS-hV-CzA"/>
+                        <outlet property="textField" destination="PQJ-E1-naq" id="3mJ-3C-z5r"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="SNv-fu-B2Q">
+                    <connections>
+                        <action selector="dismissKeyboardWithSender:" destination="BYZ-38-t0r" id="GC7-s3-Gyc"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="136.80000000000001" y="138.98050974512745"/>
         </scene>
