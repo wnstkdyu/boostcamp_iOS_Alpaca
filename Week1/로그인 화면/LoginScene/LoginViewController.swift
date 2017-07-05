@@ -44,21 +44,19 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func signIn(_ sender: Any) {
         print("touch up inside - sign in")
-        if let id = idTextField.text, let pw = pwTextField.text {
-            if id != "" && pw != "" {
+        if let id = idTextField.text,
+            let pw = pwTextField.text,
+            !id.isEmpty && !pw.isEmpty{
                 print("ID: \(id), PW: \(pw)")
             }
             else {
                 print("ERROR!")
             }
-        }
-        
     }
+    
     @IBAction func signUp(_ sender: Any) {
         print("touch up inside - sign up")
     }
     
-
-
 }
 

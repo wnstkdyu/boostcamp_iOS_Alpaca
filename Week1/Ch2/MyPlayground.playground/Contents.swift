@@ -61,28 +61,29 @@ for (i, string) in countingUp.enumerated() {
     print((i, string))
 }
 
+/* enum의 case 명명법 변경 */
 enum PieType {
-    case Apple
-    case Cherry
-    case Pecan
+    case apple
+    case cherry
+    case pecan
 }
-let favoritePie = PieType.Apple
+let favoritePie = PieType.apple
 let name: String
 switch favoritePie {
-case .Apple:
+case .apple:
     name = "Apple"
-case .Cherry:
+case .cherry:
     name = "Cherry"
-case .Pecan:
+case .pecan:
     name = "Pecan"
 }
 
 enum PieType2: Int {
-    case Apple = 0
-    case Cherry
-    case Pecan
+    case apple = 0
+    case cherry
+    case pecan
 }
-let pieRawValue = PieType2.Cherry.rawValue
+let pieRawValue = PieType2.cherry.rawValue
 if let pieType = PieType2(rawValue: pieRawValue) {
     
 }
