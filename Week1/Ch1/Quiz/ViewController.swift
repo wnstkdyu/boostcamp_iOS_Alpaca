@@ -24,7 +24,7 @@ class ViewController: UIViewController {
             currentQuestionIndex = 0
         }
         */
-        currentQuestionIndex = currentQuestionIndex == questions.count ? 0 : currentQuestionIndex + 1
+        currentQuestionIndex = (currentQuestionIndex == questions.count - 1) ? 0 : currentQuestionIndex + 1
         
         let question: String = questions[currentQuestionIndex]
         questionLabel.text = question
