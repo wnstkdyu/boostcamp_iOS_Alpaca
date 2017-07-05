@@ -60,16 +60,14 @@ class ConversionViewController: UIViewController, UITextFieldDelegate {
         
         let existingTextHasDecimalSeparator = textField.text?.range(of: ".")
         let replacementTextHasDecimalSeparator = string.range(of: ".")
+        let hasAlphabet = string.rangeOfCharacter(from: NSCharacterSet.letters) // 알파벳을 가지고 있으면 거기에 맞는 range 반환.
         
-        
-        if existingTextHasDecimalSeparator != nil && replacementTextHasDecimalSeparator != nil {
+        if (existingTextHasDecimalSeparator != nil && replacementTextHasDecimalSeparator != nil) || hasAlphabet != nil {
             return false
         }
         else {
             return true
         }
- 
-        
         
     }
     
