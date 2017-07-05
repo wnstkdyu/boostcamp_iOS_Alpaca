@@ -18,10 +18,13 @@ class ViewController: UIViewController {
     var currentQuestionIndex: Int = 0
     
     @IBAction func showNextQuestion(sender: AnyObject) {
+        /*
         currentQuestionIndex += 1
         if currentQuestionIndex == questions.count {
             currentQuestionIndex = 0
         }
+        */
+        currentQuestionIndex = currentQuestionIndex == questions.count ? 0 : currentQuestionIndex + 1
         
         let question: String = questions[currentQuestionIndex]
         questionLabel.text = question
