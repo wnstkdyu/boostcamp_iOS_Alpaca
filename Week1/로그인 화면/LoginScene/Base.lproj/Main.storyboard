@@ -83,9 +83,8 @@
                             <constraint firstItem="lA1-5h-0F4" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="8" id="Qz0-Ad-4X5"/>
                             <constraint firstItem="q2K-wO-1xS" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="40" id="VdW-ua-Mcy"/>
                             <constraint firstItem="kcY-Ku-wQi" firstAttribute="centerX" secondItem="q2K-wO-1xS" secondAttribute="centerX" id="d1Q-Sb-pJh"/>
-                            <constraint firstAttribute="trailing" secondItem="lA1-5h-0F4" secondAttribute="trailing" id="h4p-d6-k4d"/>
+                            <constraint firstItem="lA1-5h-0F4" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="pT8-wy-MhT"/>
                             <constraint firstItem="kcY-Ku-wQi" firstAttribute="top" secondItem="q2K-wO-1xS" secondAttribute="bottom" constant="17.5" id="w6s-Lr-O3A"/>
-                            <constraint firstItem="lA1-5h-0F4" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="xfm-4W-qDd"/>
                         </constraints>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="mEi-9h-9TV" appends="YES" id="dd0-9x-6sN"/>
