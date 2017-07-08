@@ -90,25 +90,39 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="136.80000000000001" y="138.98050974512745"/>
+            <point key="canvasLocation" x="1145" y="-187"/>
         </scene>
         <!--Map-->
         <scene sceneID="dfm-oI-853">
             <objects>
                 <viewController id="k5Q-NI-sv8" customClass="MapViewController" customModule="WorldTrotter" customModuleProvider="target" sceneMemberID="viewController">
-                    <button key="view" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="8hy-Tk-T94">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="zIx-eF-FAX"/>
+                        <viewControllerLayoutGuide type="bottom" id="fv8-8w-ofn"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Out-4a-7f9">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <state key="normal" title="Button"/>
-                        <connections>
-                            <action selector="locateCurrentPositionWithSender:" destination="k5Q-NI-sv8" eventType="touchUpInside" id="Qi3-4X-xkW"/>
-                        </connections>
-                    </button>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wmb-Qg-Eu8">
+                                <rect key="frame" x="164" y="318" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="locateCurrentPositionWithSender:" destination="k5Q-NI-sv8" eventType="touchUpInside" id="A5C-40-8lh"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
                     <tabBarItem key="tabBarItem" title="Map" image="MapIcon" id="iag-v3-Teb"/>
+                    <connections>
+                        <outlet property="currentLocationButton" destination="Wmb-Qg-Eu8" id="Mlv-nA-Lcq"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vfl-MG-anb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1606" y="139"/>
+            <point key="canvasLocation" x="2057" y="30"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="TxB-S5-yXc">
@@ -128,7 +142,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="s8k-ch-NZp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="892" y="24"/>
+            <point key="canvasLocation" x="-52" y="48"/>
         </scene>
         <!--Item-->
         <scene sceneID="9TZ-5J-xpl">
@@ -138,7 +152,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e9p-Mf-EbK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="892" y="772"/>
+            <point key="canvasLocation" x="1298" y="657"/>
         </scene>
     </scenes>
     <resources>
