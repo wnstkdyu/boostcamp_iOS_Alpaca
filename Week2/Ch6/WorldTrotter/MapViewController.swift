@@ -9,9 +9,11 @@
 import UIKit
 import MapKit
 
-class MapViewController: UIViewController {
+class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
 
     var mapView: MKMapView!
+    var currentLocation: UIButton!
+    var zoom: UIButton!
     
     override func loadView() {
         // 지도 뷰 생성
@@ -42,6 +44,32 @@ class MapViewController: UIViewController {
         topConstraint.isActive = true
         leadingConstraint.isActive = true
         trailingConstraint.isActive = true
+        
+        // 현재 위치표시, 줌 버튼 추가
+        currentLocation = UIButton()
+        zoom = UIButton()
+        
+        currentLocation.setTitle("현재 위치", for: .normal)
+        zoom.setTitle("확대", for: .normal)
+        
+        currentLocation.setTitleColor(UIColor.red, for: .normal)
+        zoom.setTitleColor(UIColor.red, for: .normal)
+        
+        currentLocation.translatesAutoresizingMaskIntoConstraints = false
+        zoom.translatesAutoresizingMaskIntoConstraints = false
+        
+        view.addSubview(currentLocation)
+        view.addSubview(zoom)
+        
+        currentLocation.addTarget(self, action: #selector(showCurrentLocation), for: .touchUpInside)
+        
+        // 버튼에 대한 제약조건 설정
+        currentLocation.leadingAnchor.constraint(equalTo: margins.leadingAnchor).isActive = true
+        currentLocation.bottomAnchor.constraint(equalTo: bottomLayoutGuide.topAnchor).isActive = true
+        
+        zoom.trailingAnchor.constraint(equalTo: margins.trailingAnchor).isActive = true
+        zoom.bottomAnchor.constraint(equalTo: bottomLayoutGuide.topAnchor).isActive = true
+        
     }
     
     func mapTypeChanged(segControl: UISegmentedControl) {
@@ -57,13 +85,49 @@ class MapViewController: UIViewController {
         }
     }
     
-    
-    
     override func viewDidLoad() {
         // super의 viewDidLoad 구현을 항상 호출한다
         super.viewDidLoad()
         
         print("MapViewController loaded its view")
     }
+    
+    // 현재 위치 표시
+    
+    var locationManager: CLLocationManager!
+    
+    func showCurrentLocation() {
+        locationManager = CLLocationManager()
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        
+        let status = CLLocationManager.authorizationStatus()
+        if status == .notDetermined {
+            locationManager.requestWhenInUseAuthorization()
+        }
+        if status == .authorizedWhenInUse {
+            locationManager.startUpdatingLocation()
+        }
+        return
+    }
+
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let location = locations[0]
+        
+        let center = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+        let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+        
+        mapView.setRegion(region, animated: true)
+        print(location)
+        
+        manager.stopUpdatingLocation()
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("Error \(error)")
+    }
+    
+    
     
 }
