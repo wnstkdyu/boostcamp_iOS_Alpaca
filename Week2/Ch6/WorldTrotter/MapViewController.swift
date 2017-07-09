@@ -62,6 +62,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         view.addSubview(zoom)
         
         currentLocation.addTarget(self, action: #selector(showCurrentLocation), for: .touchUpInside)
+        zoom.addTarget(self, action: #selector(zoomIn), for: .touchUpInside)
         
         // 버튼에 대한 제약조건 설정
         currentLocation.leadingAnchor.constraint(equalTo: margins.leadingAnchor).isActive = true
@@ -88,6 +89,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     override func viewDidLoad() {
         // super의 viewDidLoad 구현을 항상 호출한다
         super.viewDidLoad()
+        mapView.showsUserLocation = true
         
         print("MapViewController loaded its view")
     }
@@ -110,16 +112,30 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         }
         return
     }
-
+    
+    func zoomIn() {
+        guard let location = locationManager.location else {
+            return
+        }
+        let center = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+        let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+        
+        mapView.setRegion(region, animated: true)
+    }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let location = locations[0]
         
         let center = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
-        let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+        let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1))
         
         mapView.setRegion(region, animated: true)
         print(location)
+        
+        let currentAnnotation = MKPointAnnotation()
+        currentAnnotation.coordinate = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+        currentAnnotation.title = "현재 있는 곳"
+        mapView.addAnnotation(currentAnnotation)
         
         manager.stopUpdatingLocation()
     }
