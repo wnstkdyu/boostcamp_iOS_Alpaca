@@ -17,6 +17,17 @@ class ConversionViewController: UIViewController, UITextFieldDelegate {
         print("ConversionViewController loaded its view")
     }
     
+    // 은메달 과제: 뷰 컨트롤러가 보일 때마다 매번 배경색을 바꾸기
+    let viewBackgroundColourArray = [UIColor.cyan, UIColor.darkGray]
+    var index = 0
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        self.view.backgroundColor = viewBackgroundColourArray[index]
+        index += 1
+        index = index % 2
+    }
+    
     @IBOutlet var celsiusLabel: UILabel!
     @IBOutlet var textField: UITextField!
     
