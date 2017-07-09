@@ -15,6 +15,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     var currentLocation: UIButton!
     var zoom: UIButton!
     
+    var rotatePin: UIButton!
+    
     override func loadView() {
         // 지도 뷰 생성
         mapView = MKMapView()
@@ -71,6 +73,29 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         zoom.trailingAnchor.constraint(equalTo: margins.trailingAnchor).isActive = true
         zoom.bottomAnchor.constraint(equalTo: bottomLayoutGuide.topAnchor).isActive = true
         
+        // 핀 추가
+        let birthAnnotation = MKPointAnnotation()
+        birthAnnotation.coordinate = CLLocationCoordinate2D(latitude: 36.101937, longitude: 128.383207)
+        birthAnnotation.title = "태어난 곳"
+        
+        let funAnnotation = MKPointAnnotation()
+        funAnnotation.coordinate = CLLocationCoordinate2D(latitude: 37.794876, longitude: 127.526743)
+        funAnnotation.title = "흥미로운 곳"
+        
+        mapView.addAnnotation(birthAnnotation)
+        mapView.addAnnotation(funAnnotation)
+        
+        rotatePin = UIButton()
+        rotatePin.setTitle("핀 순회", for: .normal)
+        rotatePin.setTitleColor(UIColor.green, for: .normal)
+        rotatePin.translatesAutoresizingMaskIntoConstraints = false
+        
+        view.addSubview(rotatePin)
+        
+        rotatePin.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        rotatePin.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        
+        rotatePin.addTarget(self, action: #selector(rotatePinFunc), for: .touchUpInside)
     }
     
     func mapTypeChanged(segControl: UISegmentedControl) {
@@ -89,8 +114,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     override func viewDidLoad() {
         // super의 viewDidLoad 구현을 항상 호출한다
         super.viewDidLoad()
-        mapView.showsUserLocation = true
-        
+        showCurrentLocation()
         print("MapViewController loaded its view")
     }
     
@@ -138,6 +162,12 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         mapView.addAnnotation(currentAnnotation)
         
         manager.stopUpdatingLocation()
+    }
+    
+    var index = 0
+    func rotatePinFunc() {
+        mapView.selectAnnotation(self.mapView.annotations[index], animated: true)
+        index = (index + 1) % 3
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
