@@ -83,7 +83,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         funAnnotation.title = "흥미로운 곳"
         
         mapView.addAnnotation(birthAnnotation)
+        print(mapView.annotations)
         mapView.addAnnotation(funAnnotation)
+        print(mapView.annotations)
         
         rotatePin = UIButton()
         rotatePin.setTitle("핀 순회", for: .normal)
@@ -115,6 +117,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         // super의 viewDidLoad 구현을 항상 호출한다
         super.viewDidLoad()
         showCurrentLocation()
+        print(mapView.annotations)
         print("MapViewController loaded its view")
     }
     
