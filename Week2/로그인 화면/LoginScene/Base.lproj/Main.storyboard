@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Login View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="LoginViewController" customModule="LoginScene" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="q2K-wO-1xS" userLabel="ID, PW StackView">
+                                <rect key="frame" x="56" y="303.5" width="263" height="60"/>
+                                <subviews>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="ID" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="InB-IN-4U6">
+                                        <rect key="frame" x="0.0" y="0.0" width="263" height="26"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="next"/>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Rmz-QF-d9Y">
+                                        <rect key="frame" x="0.0" y="34" width="263" height="26"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES"/>
+                                    </textField>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="InB-IN-4U6" firstAttribute="height" secondItem="Rmz-QF-d9Y" secondAttribute="height" id="LVL-C0-bxu"/>
+                                    <constraint firstAttribute="height" constant="60" id="sxL-g2-HTX"/>
+                                </constraints>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="kcY-Ku-wQi" userLabel="Sign In, Up StackView">
+                                <rect key="frame" x="56" y="381" width="263" height="30"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RZ7-bG-ErJ">
+                                        <rect key="frame" x="0.0" y="0.0" width="121" height="30"/>
+                                        <state key="normal" title="Sign In"/>
+                                        <connections>
+                                            <action selector="signIn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="P9y-ur-RdJ"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B0R-kb-c3l">
+                                        <rect key="frame" x="121" y="0.0" width="142" height="30"/>
+                                        <state key="normal" title="Sign Up">
+                                            <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="signUp:" destination="BYZ-38-t0r" eventType="touchUpInside" id="D31-0I-h2c"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="B0R-kb-c3l" firstAttribute="centerY" secondItem="kcY-Ku-wQi" secondAttribute="centerY" id="ThK-cy-h8f"/>
+                                    <constraint firstItem="RZ7-bG-ErJ" firstAttribute="centerY" secondItem="kcY-Ku-wQi" secondAttribute="centerY" id="Z6I-Ep-UNs"/>
+                                </constraints>
+                            </stackView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="yagom_symbol_2014" translatesAutoresizingMaskIntoConstraints="NO" id="lA1-5h-0F4">
+                                <rect key="frame" x="0.0" y="8" width="375" height="265.5"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstItem="q2K-wO-1xS" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="2m7-AP-Kvf"/>
+                            <constraint firstItem="lA1-5h-0F4" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Ekc-TA-ay5"/>
+                            <constraint firstItem="kcY-Ku-wQi" firstAttribute="width" secondItem="q2K-wO-1xS" secondAttribute="width" id="IC4-yp-H08"/>
+                            <constraint firstItem="q2K-wO-1xS" firstAttribute="top" secondItem="lA1-5h-0F4" secondAttribute="bottom" constant="30" id="KnW-PK-UaO"/>
+                            <constraint firstItem="q2K-wO-1xS" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="MMG-Fj-y4P"/>
+                            <constraint firstItem="lA1-5h-0F4" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="8" id="Qz0-Ad-4X5"/>
+                            <constraint firstItem="q2K-wO-1xS" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="40" id="VdW-ua-Mcy"/>
+                            <constraint firstItem="kcY-Ku-wQi" firstAttribute="centerX" secondItem="q2K-wO-1xS" secondAttribute="centerX" id="d1Q-Sb-pJh"/>
+                            <constraint firstItem="lA1-5h-0F4" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="pT8-wy-MhT"/>
+                            <constraint firstItem="kcY-Ku-wQi" firstAttribute="top" secondItem="q2K-wO-1xS" secondAttribute="bottom" constant="17.5" id="w6s-Lr-O3A"/>
+                        </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="mEi-9h-9TV" appends="YES" id="dd0-9x-6sN"/>
+                        </connections>
+                    </view>
+                    <connections>
+                        <outlet property="idTextField" destination="InB-IN-4U6" id="nhZ-BN-lfu"/>
+                        <outlet property="pwTextField" destination="Rmz-QF-d9Y" id="z3J-LB-nrK"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="mEi-9h-9TV">
+                    <connections>
+                        <action selector="dismissKeyboard:" destination="BYZ-38-t0r" id="g09-f0-LSw"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="32.799999999999997" y="38.23088455772114"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="yagom_symbol_2014" width="1183" height="1138"/>
+    </resources>
+</document>
