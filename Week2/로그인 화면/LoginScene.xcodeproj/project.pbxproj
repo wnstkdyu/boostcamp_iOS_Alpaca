@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7DA28A891F13A9090035A0A6 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA28A881F13A9090035A0A6 /* SignUpViewController.swift */; };
 		7DCCFF761F090537009AA0F3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DCCFF751F090537009AA0F3 /* AppDelegate.swift */; };
 		7DCCFF781F090537009AA0F3 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DCCFF771F090537009AA0F3 /* LoginViewController.swift */; };
 		7DCCFF7B1F090537009AA0F3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7DCCFF791F090537009AA0F3 /* Main.storyboard */; };
@@ -26,6 +27,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7DA28A881F13A9090035A0A6 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		7DCCFF721F090537009AA0F3 /* LoginScene.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LoginScene.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7DCCFF751F090537009AA0F3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7DCCFF771F090537009AA0F3 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -80,6 +82,7 @@
 				7DCCFF751F090537009AA0F3 /* AppDelegate.swift */,
 				7DCCFF771F090537009AA0F3 /* LoginViewController.swift */,
 				7DCCFF791F090537009AA0F3 /* Main.storyboard */,
+				7DA28A881F13A9090035A0A6 /* SignUpViewController.swift */,
 				7DCCFF7C1F090537009AA0F3 /* Assets.xcassets */,
 				7DCCFF7E1F090537009AA0F3 /* LaunchScreen.storyboard */,
 				7DCCFF811F090537009AA0F3 /* Info.plist */,
@@ -201,6 +204,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7DA28A891F13A9090035A0A6 /* SignUpViewController.swift in Sources */,
 				7DCCFF781F090537009AA0F3 /* LoginViewController.swift in Sources */,
 				7DCCFF761F090537009AA0F3 /* AppDelegate.swift in Sources */,
 			);
