@@ -134,7 +134,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             locationManager.requestWhenInUseAuthorization()
         }
         if status == .authorizedWhenInUse {
-            locationManager.startUpdatingLocation()
+            locationManager.requestLocation()
         }
         return
     }
@@ -163,7 +163,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         currentAnnotation.title = "현재 있는 곳"
         mapView.addAnnotation(currentAnnotation)
         print(mapView.annotations)
-        manager.stopUpdatingLocation()
     }
     
     var index = 0
