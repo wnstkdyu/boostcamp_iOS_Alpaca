@@ -24,8 +24,7 @@ class ConversionViewController: UIViewController, UITextFieldDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         self.view.backgroundColor = viewBackgroundColourArray[index]
-        index += 1
-        index = index % 2
+        index = (index + 1) % 2
     }
     
     @IBOutlet var celsiusLabel: UILabel!
