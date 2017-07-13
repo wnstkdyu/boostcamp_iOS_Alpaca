@@ -10,8 +10,6 @@ if let value = fahrenheitValue {
         else {
             return nil
         }
-
-        }
 ```
 
 - 비슷한 것끼리 모아둔다.
