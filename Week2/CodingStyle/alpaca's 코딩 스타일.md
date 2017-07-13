@@ -4,8 +4,13 @@
 - K & R (Stroustrup)
 
 ```swift
-if let value = celsiusValue {
-            celsiusLabel.text = numberFormatter.string(from: NSNumber(value: value))
+if let value = fahrenheitValue {
+            return (value - 32) * (5/9)
+        }
+        else {
+            return nil
+        }
+
         }
 ```
 
