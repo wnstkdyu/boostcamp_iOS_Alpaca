@@ -96,6 +96,7 @@
                     <connections>
                         <outlet property="idTextField" destination="InB-IN-4U6" id="nhZ-BN-lfu"/>
                         <outlet property="pwTextField" destination="Rmz-QF-d9Y" id="z3J-LB-nrK"/>
+                        <outlet property="signInUp_StackView" destination="kcY-Ku-wQi" id="a8u-PI-DwA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

@@ -7,20 +7,25 @@
 //
 
 import UIKit
+import FacebookLogin
 
 class LoginViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var idTextField: UITextField!
     @IBOutlet weak var pwTextField: UITextField!
+    @IBOutlet weak var signInUp_StackView: UIStackView!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         idTextField.delegate = self
         pwTextField.delegate = self
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        //Facebook button add
+        let loginButton = LoginButton(readPermissions: [.publicProfile])
+        view.addSubview(loginButton)
+        loginButton.topAnchor.constraint(equalTo: signInUp_StackView.bottomAnchor).isActive = true
     }
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
