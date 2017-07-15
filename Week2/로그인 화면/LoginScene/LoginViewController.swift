@@ -21,10 +21,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         idTextField.delegate = self
         pwTextField.delegate = self
         
-        //Facebook button add
+        // Facebook button add
         let loginButton = LoginButton(readPermissions: [.publicProfile])
         view.addSubview(loginButton)
-        loginButton.topAnchor.constraint(equalTo: signInUp_StackView.bottomAnchor).isActive = true
+        loginButton.center.x = view.center.x
+        loginButton.center.y = view.center.y.adding(100.0)
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
