@@ -13,6 +13,8 @@ class ItemsViewController: UITableViewController {
     // ItemStore용 프로퍼티 추가
     var itemStore: ItemStore!
     
+    var myImageView: UIImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -22,8 +24,14 @@ class ItemsViewController: UITableViewController {
         let insets = UIEdgeInsets(top: statusBarHeight, left: 0, bottom: 0, right: 0)
         tableView.contentInset = insets
         tableView.scrollIndicatorInsets = insets
+        
+        // TableView 배경에 이미지를 표시한다.
+        myImageView = UIImageView()
+        
+        tableView.backgroundView = myImageView
+        myImageView.image = #imageLiteral(resourceName: "74CVLoJ2_bYGQV_3gAdRT_257508")
+        myImageView.center = tableView.center
     }
-    
     /* 동메달 과제: 테이블 섹션 구현
     // 섹션의 갯수 설정
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -91,10 +99,18 @@ class ItemsViewController: UITableViewController {
         case originalItemCount - 1:
             cell.textLabel?.text = "No more items!"
             cell.detailTextLabel?.text = "No value"
+            
+            cell.backgroundColor = UIColor.clear
             return cell
         default:
             cell.textLabel?.text = item.name
             cell.detailTextLabel?.text = "$\(item.valueInDollars)"
+            
+            // 폰트 사이즈 변경
+            cell.textLabel?.font = UIFont(name: "System", size: 20.0)
+            cell.detailTextLabel?.font = UIFont(name: "System", size: 20.0)
+            
+            cell.backgroundColor = UIColor.clear
             return cell
         }
         
@@ -122,5 +138,18 @@ class ItemsViewController: UITableViewController {
 //            return cell
 //        }
         
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        let originalItemCount = itemStore.allItems.count
+        
+        // 마지막 행의 높이는 44포인트, 나머지는 60포인트로 설정한다.
+        switch indexPath.row {
+        case originalItemCount - 1:
+            return 44.0
+        default:
+            return 60.0
+        }
     }
 }
