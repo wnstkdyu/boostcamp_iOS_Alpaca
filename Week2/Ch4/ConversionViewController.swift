@@ -61,17 +61,24 @@ class ConversionViewController: UIViewController, UITextFieldDelegate {
     
     // 최대 하나의 소수점을 받도록
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        let existingTextHasDecimalSeparator = textField.text?.range(of: ".")
-        let replacementTextHasDecimalSeparator = string.range(of: ".")
-        
         // 알파벳 문자 입력 받지 않게 하기
-        let replacementTextHasAlphabet = string.rangeOfCharacter(from: CharacterSet.letters)
-        
-        if (existingTextHasDecimalSeparator != nil && replacementTextHasDecimalSeparator != nil) || replacementTextHasAlphabet != nil{
+        guard string.rangeOfCharacter(from: CharacterSet.letters) == nil else {
             return false
         }
-        else {
+        
+        // 소수점 두개 받지 않게 하기
+        guard textField.text?.range(of: ".") != nil else {
             return true
         }
+        guard string.range(of: ".") != nil else {
+            return true
+        }
+        
+        // 둘다 nil이 아닐 경우 false를 반환해야함.
+        return false
+        
+       
+        
+        
     }
 }
