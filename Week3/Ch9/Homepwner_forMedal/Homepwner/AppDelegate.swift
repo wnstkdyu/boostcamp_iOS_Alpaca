@@ -20,6 +20,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // ItemStore의 인스턴스 생성
         let itemStore = ItemStore()
         
+        // 하나의 아이템이 더 들어가게끔 생성
+        itemStore.allItems.append(Item(random: true))
+        
         // ItemViewController에 접근하여 itemStore를 설정한다.
         let itemsController = window!.rootViewController as! ItemsViewController
         itemsController.itemStore = itemStore
