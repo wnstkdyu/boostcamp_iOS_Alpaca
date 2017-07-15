@@ -116,7 +116,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     override func viewDidLoad() {
         // super의 viewDidLoad 구현을 항상 호출한다
         super.viewDidLoad()
-        showCurrentLocation()
         print(mapView.annotations)
         print("MapViewController loaded its view")
     }
@@ -135,7 +134,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             locationManager.requestWhenInUseAuthorization()
         }
         if status == .authorizedWhenInUse {
-            locationManager.startUpdatingLocation()
+            locationManager.requestLocation()
         }
         return
     }
@@ -163,14 +162,14 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         currentAnnotation.coordinate = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
         currentAnnotation.title = "현재 있는 곳"
         mapView.addAnnotation(currentAnnotation)
-        
-        manager.stopUpdatingLocation()
+        print(mapView.annotations)
     }
     
     var index = 0
     func rotatePinFunc() {
         mapView.selectAnnotation(self.mapView.annotations[index], animated: true)
-        index = (index + 1) % 3
+        print(mapView.annotations)
+        index = (index + 1) % mapView.annotations.count
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
