@@ -93,8 +93,6 @@ class ItemsViewController: UITableViewController {
     
     // 테이블 행 옮기기
     override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        // 모델을 업데이트한다.
-        itemStore.moveItemAtIndex(fromIndex: sourceIndexPath.row, toIndex: destinationIndexPath.row)
     }
     
     /* 동메달 과제: Delete 버튼 이름 변경하기 */
@@ -125,6 +123,31 @@ class ItemsViewController: UITableViewController {
             return true
         }
     }
+    
+    /* 금메달 과제: 재정렬 완전히 막기 */
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        // 마지막 행은 수정 수 없도록 구현
+        let lastRow = tableView.numberOfRows(inSection: 0) - 1
+        let lastIndexPath = IndexPath(row: lastRow, section: 0)
+        
+        if indexPath == lastIndexPath {
+            return false
+        } else {
+            return true
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, targetIndexPathForMoveFromRowAt sourceIndexPath: IndexPath, toProposedIndexPath proposedDestinationIndexPath: IndexPath) -> IndexPath {
+        // 목적지가 마지막 인덱스보다 아래라면
+        if proposedDestinationIndexPath.row >= tableView.numberOfRows(inSection: 0) - 1 {
+            itemStore.moveItemAtIndex(fromIndex: sourceIndexPath.row, toIndex: proposedDestinationIndexPath.row - 1)
+            return IndexPath(row: tableView.numberOfRows(inSection: 0) - 2, section: 0)
+        } else {
+            itemStore.moveItemAtIndex(fromIndex: sourceIndexPath.row, toIndex: proposedDestinationIndexPath.row)
+            return proposedDestinationIndexPath
+        }
+    }
+    
     // 테이블 헤더 뷰 구현
     @IBAction func addNewItem(sender: AnyObject) {
 //        // 0번 섹션, 마지막 행의 인덱스 패스를 만든다.
