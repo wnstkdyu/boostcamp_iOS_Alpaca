@@ -22,6 +22,10 @@ class ItemsViewController: UITableViewController {
         let insets = UIEdgeInsets(top: statusBarHeight, left: 0, bottom: 0, right: 0)
         tableView.contentInset = insets
         tableView.scrollIndicatorInsets = insets
+        
+//        tableView.rowHeight = 65
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 65
     }
     
     // 표시해야 할 행의 개수를 리턴
@@ -31,19 +35,20 @@ class ItemsViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        
-//        // 기본 모양을 가진 UITableViewCell 인스턴스를 만든다.
-//        let cell = UITableViewCell(style: .value1, reuseIdentifier: "UITableViewCell")
-//        
         // 재사용 셀이나 새로운 셀을 얻는다.
-        let cell = tableView.dequeueReusableCell(withIdentifier: "UITableViewCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ItemCell", for: indexPath) as! ItemCell
+        
+        // 선호하는 텍스트 크기로 라벨을 업데이트한다
+        cell.updateLabels()
         
         // 물품 배열의 n번째에 있는 항목의 설명을 n과 row가 일치하는 셀의 텍스트로 설정한다
         // 이 셀은 테이블 뷰의 n번째 행에 나타난다.
         let item = itemStore.allItems[indexPath.row]
         
-        cell.textLabel?.text = item.name
-        cell.detailTextLabel?.text = "$\(item.valueInDollars)"
+        // Item을 가지고 셀을 설정한다.
+        cell.nameLabel.text = item.name
+        cell.serialNumberLabel.text = item.serialNumber
+        cell.valueLabel.text = "$\(item.valueInDollars)"
         
         return cell
     }
