@@ -42,8 +42,21 @@ class ItemsViewController: UITableViewController {
         // 이 셀은 테이블 뷰의 n번째 행에 나타난다.
         let item = itemStore.allItems[indexPath.row]
         
+        /* 은메달 과제: 재정렬 막기 */
+        // 마지막 행을 설정
+        let lastRow = tableView.numberOfRows(inSection: 0) - 1
+        let lastIndexPath = IndexPath(row: lastRow, section: 0)
+        
+        if indexPath == lastIndexPath {
+            cell.textLabel?.text = "No more items!"
+            cell.detailTextLabel?.text = "No value"
+            
+            return cell
+        }
         cell.textLabel?.text = item.name
         cell.detailTextLabel?.text = "$\(item.valueInDollars)"
+        
+        
         
         return cell
     }
@@ -100,6 +113,18 @@ class ItemsViewController: UITableViewController {
         return [removeCellButton]
     }
     
+    /* 은메달 과제: 재정렬 막기 */
+    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        // 마지막 행은 움직일 수 없도록 구현
+        let lastRow = tableView.numberOfRows(inSection: 0) - 1
+        let lastIndexPath = IndexPath(row: lastRow, section: 0)
+        
+        if indexPath == lastIndexPath {
+            return false
+        } else {
+            return true
+        }
+    }
     // 테이블 헤더 뷰 구현
     @IBAction func addNewItem(sender: AnyObject) {
 //        // 0번 섹션, 마지막 행의 인덱스 패스를 만든다.
@@ -116,7 +141,7 @@ class ItemsViewController: UITableViewController {
         guard let index = itemStore.allItems.index(of: newItem) else {
             fatalError()
         }
-        let indexPath = IndexPath(row: index, section: 0)
+        let indexPath = IndexPath(row: index - 1, section: 0)
         
         // 테이블에 새로운 행을 삽입한다.
         tableView.insertRows(at: [indexPath], with: .automatic)

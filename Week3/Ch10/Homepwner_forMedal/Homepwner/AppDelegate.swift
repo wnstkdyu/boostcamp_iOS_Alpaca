@@ -20,6 +20,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // ItemStore의 인스턴스 생성
         let itemStore = ItemStore()
         
+        // No more item을 넣을 item 생성
+        itemStore.createItem()
+        
         // ItemViewController에 접근하여 itemStore를 설정한다.
         let itemsController = window!.rootViewController as! ItemsViewController
         itemsController.itemStore = itemStore
