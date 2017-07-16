@@ -66,20 +66,15 @@ class ItemsViewController: UITableViewController {
             
             let deleteAction = UIAlertAction(title: "Delete", style: .destructive,
                                              handler: { (action) -> Void in
-                                                // 저장소에서 그 항목을 제거한다.
-                                                self.itemStore.removeItem(item: item)
-                                                // 또한 애니메이션과 함께 테이블 뷰에서 그 행을 제거한다.
-                                                tableView.deleteRows(at: [indexPath], with: .automatic)})
+                                             // 저장소에서 그 항목을 제거한다.
+                                             self.itemStore.removeItem(item: item)
+                                             // 또한 애니메이션과 함께 테이블 뷰에서 그 행을 제거한다.
+                                             tableView.deleteRows(at: [indexPath], with: .automatic)})
             ac.addAction(deleteAction)
             
             // 알림창 컨트롤러를 표시한다.
             present(ac, animated: true, completion: nil)
             
-//            // 저장소에서 그 항목을 제거한다.
-//            itemStore.removeItem(item: item)
-//            
-//            // 또한 애니메이션과 함께 테이블 뷰에서 그 행을 제거한다.
-//            tableView.deleteRows(at: [indexPath], with: .automatic)
         }
     }
     
@@ -87,6 +82,22 @@ class ItemsViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         // 모델을 업데이트한다.
         itemStore.moveItemAtIndex(fromIndex: sourceIndexPath.row, toIndex: destinationIndexPath.row)
+    }
+    
+    /* 동메달 과제: Delete 버튼 이름 변경하기 */
+    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        
+        let item = itemStore.allItems[indexPath.row]
+        
+        // removeCell 버튼을 설정한다.
+        let removeCellButton = UITableViewRowAction(style: .destructive, title: "Remove",
+                                                    handler: { (action) -> Void in
+                                                        // 저장소에서 그 항목을 제거한다.
+                                                        self.itemStore.removeItem(item: item)
+                                                        // 또한 애니메이션과 함께 테이블 뷰에서 그 행을 제거한다.
+                                                        tableView.deleteRows(at: [indexPath], with: .automatic)})
+        
+        return [removeCellButton]
     }
     
     // 테이블 헤더 뷰 구현
