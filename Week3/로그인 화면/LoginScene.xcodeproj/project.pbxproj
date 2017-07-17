@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		34A8BA352456B1A933B960B1 /* Pods_LoginSceneTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 083A1AB55156CBD6957F6FAF /* Pods_LoginSceneTests.framework */; };
+		7D94165A1F1B796000745C90 /* MyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9416591F1B796000745C90 /* MyButton.swift */; };
 		7DA28A891F13A9090035A0A6 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA28A881F13A9090035A0A6 /* SignUpViewController.swift */; };
 		7DCCFF761F090537009AA0F3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DCCFF751F090537009AA0F3 /* AppDelegate.swift */; };
 		7DCCFF781F090537009AA0F3 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DCCFF771F090537009AA0F3 /* LoginViewController.swift */; };
@@ -32,6 +33,7 @@
 		083A1AB55156CBD6957F6FAF /* Pods_LoginSceneTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LoginSceneTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2DB0F96F635B81E47818953F /* Pods-LoginScene.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LoginScene.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LoginScene/Pods-LoginScene.debug.xcconfig"; sourceTree = "<group>"; };
 		51EABB7FA71F4EBD31F2C892 /* Pods-LoginSceneTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LoginSceneTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-LoginSceneTests/Pods-LoginSceneTests.release.xcconfig"; sourceTree = "<group>"; };
+		7D9416591F1B796000745C90 /* MyButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyButton.swift; sourceTree = "<group>"; };
 		7DA28A881F13A9090035A0A6 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		7DCCFF721F090537009AA0F3 /* LoginScene.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LoginScene.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7DCCFF751F090537009AA0F3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -93,6 +95,7 @@
 			children = (
 				7DCCFF751F090537009AA0F3 /* AppDelegate.swift */,
 				7DCCFF771F090537009AA0F3 /* LoginViewController.swift */,
+				7D9416591F1B796000745C90 /* MyButton.swift */,
 				7DCCFF791F090537009AA0F3 /* Main.storyboard */,
 				7DA28A881F13A9090035A0A6 /* SignUpViewController.swift */,
 				7DCCFF7C1F090537009AA0F3 /* Assets.xcassets */,
@@ -338,6 +341,7 @@
 				7DA28A891F13A9090035A0A6 /* SignUpViewController.swift in Sources */,
 				7DCCFF781F090537009AA0F3 /* LoginViewController.swift in Sources */,
 				7DCCFF761F090537009AA0F3 /* AppDelegate.swift in Sources */,
+				7D94165A1F1B796000745C90 /* MyButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

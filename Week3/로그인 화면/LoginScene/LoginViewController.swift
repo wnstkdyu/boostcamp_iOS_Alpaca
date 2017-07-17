@@ -11,6 +11,8 @@ import FacebookLogin
 
 class LoginViewController: UIViewController, UITextFieldDelegate {
     
+    var myButton: MyButton!
+    
     @IBOutlet weak var idTextField: UITextField!
     @IBOutlet weak var pwTextField: UITextField!
     @IBOutlet weak var signInUp_StackView: UIStackView!
@@ -26,6 +28,21 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         view.addSubview(loginButton)
         loginButton.center.x = view.center.x
         loginButton.center.y = view.center.y.adding(100.0)
+        
+        // MyButton 추가
+        myButton = MyButton()
+        
+        view.addSubview(myButton)
+        
+        // myButton 제약조건 설정
+        let margins = view.layoutMarginsGuide
+        
+        myButton.translatesAutoresizingMaskIntoConstraints = false
+        myButton.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 20.0).isActive = true
+        myButton.heightAnchor.constraint(equalToConstant: 100.0).isActive = true
+        myButton.leadingAnchor.constraint(equalTo: margins.leadingAnchor).isActive = true
+        myButton.trailingAnchor.constraint(equalTo: margins.trailingAnchor).isActive = true
+
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
