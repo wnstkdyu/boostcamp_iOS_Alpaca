@@ -116,10 +116,14 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 myButton.addGestureRecognizer(myButton.tapGestureRecognizer)
                 myButton.addGestureRecognizer(myButton.longPressGestureRecognizer)
                 
+                myButton.backGroundImageView.alpha = 0.3
+                
                 sender.isSelected = false
             } else if sender.isSelected == false {
                 myButton.removeGestureRecognizer(myButton.tapGestureRecognizer)
                 myButton.removeGestureRecognizer(myButton.longPressGestureRecognizer)
+                
+                myButton.backGroundImageView.alpha = 0.0
                 
                 sender.isSelected = true
             }
