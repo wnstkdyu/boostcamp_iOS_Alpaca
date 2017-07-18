@@ -65,22 +65,23 @@ class MyButton: UIView, UIGestureRecognizerDelegate {
         /* gestureRecognizer */
         // gestureRecognizer 인스턴스 생성
         tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(actionWhenTapping(sender:)))
-        longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(actionWhenLongPressing(sender:)))
+//        longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(actionWhenLongPressing(sender:)))
         
         // gestureRecognizer delegate를 myButton으로 설정
         tapGestureRecognizer.delegate = self
-        longPressGestureRecognizer.delegate = self
+//        longPressGestureRecognizer.delegate = self.
         
-        longPressGestureRecognizer.minimumPressDuration = 0.01
+//        longPressGestureRecognizer.minimumPressDuration = 0.01
         
         self.addGestureRecognizer(tapGestureRecognizer)
-        self.addGestureRecognizer(longPressGestureRecognizer)
+//        self.addGestureRecognizer(longPressGestureRecognizer)
         
         
         /* controlState */
         // controlState의 상태 초기화
         controlState = UIControlState.normal
         stateLabel.text = "normal"
+        stateLabel.textColor = UIColor.yellow
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -90,65 +91,104 @@ class MyButton: UIView, UIGestureRecognizerDelegate {
     // 탭 시 변화하는 메서드 구현
     func actionWhenTapping(sender: UITapGestureRecognizer) {
         // 버튼의 상태에 따라 달라짐
-        switch controlState {
-        case UIControlState.normal:
+        if controlState == UIControlState.normal {
             controlState = UIControlState.selected
             stateLabel.text = "selected"
             stateLabel.textColor = UIColor.green
-        case UIControlState.selected:
+            backGroundImageView.alpha = 0.3
+        } else if controlState == UIControlState.selected {
             controlState = UIControlState.normal
             stateLabel.text = "normal"
-            stateLabel.textColor = UIColor.black
-        default:
-            break
+            stateLabel.textColor = UIColor.yellow
+            backGroundImageView.alpha = 0.3
+        }
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if controlState == UIControlState.normal {
+            stateLabel.text = "highlighted1"
+            stateLabel.textColor = UIColor.white
+            backGroundImageView.alpha = 0.8
+        } else if controlState == UIControlState.selected {
+            stateLabel.text = "highlighted2"
+            stateLabel.textColor = UIColor.red
+            backGroundImageView.alpha = 0.8
+        }
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let touch = touches.first else { return }
+        let touchLocation = touch.location(in: self)
+        
+        if self.bounds.contains(touchLocation) == false {
+            guard let text = stateLabel.text else { return }
+            switch text {
+            case "highlighted1":
+                controlState = UIControlState.normal
+                stateLabel.text = "normal"
+                stateLabel.textColor = UIColor.yellow
+                backGroundImageView.alpha = 0.3
+            case "highlighted2":
+                controlState = UIControlState.selected
+                stateLabel.text = "selected"
+                stateLabel.textColor = UIColor.green
+                backGroundImageView.alpha = 0.3
+            default:
+                break
+            }
         }
     }
     
     // 롱프레스 시 변화하는 메서드 구현
-    func actionWhenLongPressing(sender: UILongPressGestureRecognizer) {
-        // normal에서 누르고 있을 경우
-        if sender.state == .began {
-            switch controlState {
-                // normal -> highlight1
-            case UIControlState.normal:
-                controlState = UIControlState.highlighted
-                stateLabel.text = "highlighted1"
-                stateLabel.textColor = UIColor.white
-                
-                backGroundImageView.alpha = 0.8
-                // selected -> highlight2
-            case UIControlState.selected:
-                controlState = UIControlState.highlighted
-                stateLabel.text = "highlighted2"
-                stateLabel.textColor = UIColor.red
-                
-                backGroundImageView.alpha = 0.8
-            default:
-                break
-            }
-        } else if sender.state == .ended {
-            guard let labelText = stateLabel.text else {
-                fatalError()
-            }
-            switch labelText {
-                // highlighted1 -> selected
-            case "highlighted1":
-                controlState = UIControlState.selected
-                stateLabel.text = "selected"
-                stateLabel.textColor = UIColor.green
-                
-                backGroundImageView.alpha = 0.3
-                // highlighted2 -> normal
-            case "highlighted2":
-                controlState = UIControlState.normal
-                stateLabel.text = "normal"
-                stateLabel.textColor = UIColor.black
-                
-                backGroundImageView.alpha = 0.3
-            default:
-                break
-            }
-        }
-    }
+//    func actionWhenLongPressing(sender: UILongPressGestureRecognizer) {
+//        // normal에서 누르고 있을 경우
+//        if sender.state == .began {
+//            switch controlState {
+//                // normal -> highlight1
+//            case UIControlState.normal:
+//                controlState = UIControlState.highlighted
+//                stateLabel.text = "highlighted1"
+//                stateLabel.textColor = UIColor.white
+//                
+//                print("longpress")
+//                
+//                backGroundImageView.alpha = 0.8
+//                // selected -> highlight2
+//            case UIControlState.selected:
+//                controlState = UIControlState.highlighted
+//                stateLabel.text = "highlighted2"
+//                stateLabel.textColor = UIColor.red
+//                
+//                print("longpress2")
+//                backGroundImageView.alpha = 0.8
+//            default:
+//                break
+//            }
+//        } else if sender.state == .ended {
+//            guard let labelText = stateLabel.text else {
+//                fatalError()
+//            }
+//            switch labelText {
+//                // highlighted1 -> selected
+//            case "highlighted1":
+//                controlState = UIControlState.selected
+//                stateLabel.text = "selected"
+//                stateLabel.textColor = UIColor.green
+//                
+//                print("longpress3")
+//                backGroundImageView.alpha = 0.3
+//                // highlighted2 -> normal
+//            case "highlighted2":
+//                controlState = UIControlState.normal
+//                stateLabel.text = "normal"
+//                stateLabel.textColor = UIColor.black
+//                
+//                print("longpress4")
+//                backGroundImageView.alpha = 0.3
+//            default:
+//                break
+//            }
+//        }
+//    }
     
 }

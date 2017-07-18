@@ -14,6 +14,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     var myButton: MyButton!
     var disableBtn: UIButton!
     
+    var isEnabled: Bool = true
+    
     @IBOutlet weak var idTextField: UITextField!
     @IBOutlet weak var pwTextField: UITextField!
     @IBOutlet weak var signInUp_StackView: UIStackView!
@@ -55,7 +57,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
         // disableBtn 설정
         disableBtn.setTitle("Disable the button", for: .normal)
-        disableBtn.setTitle("Enable the button", for: .selected)
+//        disableBtn.setTitle("Able the button", for: .selected)
         
         disableBtn.setTitleColor(UIColor.black, for: .normal)
         disableBtn.setTitleColor(UIColor.black, for: .selected)
@@ -110,23 +112,19 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     func disableMyBtn(_ sender: UIButton) {
-        // sender의 상태에 따라 다르게
-        if sender.isHighlighted {
-            if sender.isSelected {
-                myButton.addGestureRecognizer(myButton.tapGestureRecognizer)
-                myButton.addGestureRecognizer(myButton.longPressGestureRecognizer)
-                
-                myButton.backGroundImageView.alpha = 0.3
-                
-                sender.isSelected = false
-            } else if sender.isSelected == false {
-                myButton.removeGestureRecognizer(myButton.tapGestureRecognizer)
-                myButton.removeGestureRecognizer(myButton.longPressGestureRecognizer)
-                
-                myButton.backGroundImageView.alpha = 0.0
-                
-                sender.isSelected = true
-            }
+        // disable의 상태에따라
+        if isEnabled {
+            myButton.isUserInteractionEnabled = false
+            myButton.backGroundImageView.alpha = 0.0
+            
+            disableBtn.setTitle("Enable the button", for: .normal)
+            isEnabled = false
+        } else {
+            myButton.isUserInteractionEnabled = true
+            myButton.backGroundImageView.alpha = 0.3
+            
+            disableBtn.setTitle("Disable the button", for: .normal)
+            isEnabled = true
         }
     }
 }
