@@ -64,12 +64,12 @@ class ItemsViewController: UITableViewController {
             let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
             alertController.addAction(cancelAction)
             
-            let deleteAction = UIAlertAction(title: "Delete", style: .destructive,
-                                             handler: { (action) -> Void in
-                                                // 저장소에서 그 항목을 제거한다.
-                                                self.itemStore.removeItem(item: item)
-                                                // 또한 애니메이션과 함께 테이블 뷰에서 그 행을 제거한다.
-                                                tableView.deleteRows(at: [indexPath], with: .automatic)})
+            let deleteAction = UIAlertAction(title: "Delete", style: .destructive, handler: { (action) -> Void in
+                // 저장소에서 그 항목을 제거한다.
+                self.itemStore.removeItem(item: item)
+                // 또한 애니메이션과 함께 테이블 뷰에서 그 행을 제거한다.
+                tableView.deleteRows(at: [indexPath], with: .automatic)})
+            
             alertController.addAction(deleteAction)
             
             // 알림창 컨트롤러를 표시한다.
