@@ -10,7 +10,7 @@ import UIKit
 
 class MyButton: UIView, UIGestureRecognizerDelegate {
     
-    var stateLabel: UILabel!
+    var stateLabel: UILabel = UILabel()
     var backGroundImageView: UIImageView!
     var tapGestureRecognizer: UITapGestureRecognizer!
     var longPressGestureRecognizer: UILongPressGestureRecognizer!

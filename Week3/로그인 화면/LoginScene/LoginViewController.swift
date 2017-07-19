@@ -35,7 +35,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
         /* myButton */
         // myButton 인스턴스 생성
-        // myButton = MyButton()
         
         view.addSubview(myButton)
         
