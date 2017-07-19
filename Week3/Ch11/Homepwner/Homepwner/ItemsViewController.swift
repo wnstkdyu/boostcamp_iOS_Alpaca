@@ -101,8 +101,10 @@ class ItemsViewController: UITableViewController {
         let newItem = itemStore.createItem()
         
         guard let index = itemStore.allItems.index(of: newItem) else {
-            fatalError()
+            print("Index is not valid")
+            return
         }
+        
         let indexPath = IndexPath(row: index, section: 0)
         
         // 테이블에 새로운 행을 삽입한다.
