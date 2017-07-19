@@ -119,23 +119,26 @@ class MyButton: UIView, UIGestureRecognizerDelegate {
         guard let touch = touches.first else { return }
         let touchLocation = touch.location(in: self)
         
-        if self.bounds.contains(touchLocation) == false {
-            guard let text = stateLabel.text else { return }
-            switch text {
-            case "highlighted1":
-                controlState = UIControlState.normal
-                stateLabel.text = "normal"
-                stateLabel.textColor = UIColor.yellow
-                backGroundImageView.alpha = 0.3
-            case "highlighted2":
-                controlState = UIControlState.selected
-                stateLabel.text = "selected"
-                stateLabel.textColor = UIColor.green
-                backGroundImageView.alpha = 0.3
-            default:
-                break
-            }
+        guard self.bounds.contains(touchLocation) == false else {
+            print("touchInside")
+            return
         }
+        guard let text = stateLabel.text else { return }
+        switch text {
+        case "highlighted1":
+            controlState = UIControlState.normal
+            stateLabel.text = "normal"
+            stateLabel.textColor = UIColor.yellow
+            backGroundImageView.alpha = 0.3
+        case "highlighted2":
+            controlState = UIControlState.selected
+            stateLabel.text = "selected"
+            stateLabel.textColor = UIColor.green
+            backGroundImageView.alpha = 0.3
+        default:
+            break
+        }
+
     }
     
     // 롱프레스 시 변화하는 메서드 구현
