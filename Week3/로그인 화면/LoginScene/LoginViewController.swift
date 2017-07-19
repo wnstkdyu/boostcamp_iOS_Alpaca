@@ -11,8 +11,8 @@ import FacebookLogin
 
 class LoginViewController: UIViewController, UITextFieldDelegate {
     
-    var myButton: MyButton!
-    var disableBtn: UIButton!
+    var myButton: MyButton = MyButton()
+    var disableBtn: UIButton = UIButton()
     
     var isEnabled: Bool = true
     
@@ -35,7 +35,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
         /* myButton */
         // myButton 인스턴스 생성
-        myButton = MyButton()
+        // myButton = MyButton()
         
         view.addSubview(myButton)
         
