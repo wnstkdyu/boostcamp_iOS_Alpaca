@@ -20,11 +20,10 @@ class ItemStore {
     }
     
     // 새 물품을 만들고 반환하는 메서드 구현
-    func createItem() -> Item {
+    func createItem(){
         let newItem = Item(random: true)
         
         allItems.append(newItem)
         
-        return newItem
     }
 }
