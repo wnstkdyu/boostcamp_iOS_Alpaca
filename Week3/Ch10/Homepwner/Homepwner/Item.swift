@@ -13,14 +13,14 @@ class Item: NSObject {
     var name: String
     var valueInDollars: Int
     var serialNumber: String?
-    let dateCreated: NSDate
+    let dateCreated: Date
     
     // 지정 이니셜라이저
     init(name: String, serialNumber: String?, valueInDollars: Int) {
         self.name = name
         self.valueInDollars = valueInDollars
         self.serialNumber = serialNumber
-        self.dateCreated = NSDate()
+        self.dateCreated = Date()
         
         super.init()
     }
