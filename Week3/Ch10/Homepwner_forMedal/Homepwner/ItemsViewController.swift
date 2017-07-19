@@ -71,22 +71,22 @@ class ItemsViewController: UITableViewController {
             let title = "Delete \(item.name)?"
             let message = "Are you sure you want to delete this item?"
             
-            let ac = UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
+            let alertController = UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
             
             // actionSheet의 action 추가
             let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-            ac.addAction(cancelAction)
+            alertController.addAction(cancelAction)
             
-            let deleteAction = UIAlertAction(title: "Delete", style: .destructive,
-                                             handler: { (action) -> Void in
-                                             // 저장소에서 그 항목을 제거한다.
-                                             self.itemStore.removeItem(item: item)
-                                             // 또한 애니메이션과 함께 테이블 뷰에서 그 행을 제거한다.
-                                             tableView.deleteRows(at: [indexPath], with: .automatic)})
-            ac.addAction(deleteAction)
+            let deleteAction = UIAlertAction(title: "Delete", style: .destructive, handler: { (action) -> Void in
+                // 저장소에서 그 항목을 제거한다.
+                self.itemStore.removeItem(item: item)
+                // 또한 애니메이션과 함께 테이블 뷰에서 그 행을 제거한다.
+                tableView.deleteRows(at: [indexPath], with: .automatic)})
+            
+            alertController.addAction(deleteAction)
             
             // 알림창 컨트롤러를 표시한다.
-            present(ac, animated: true, completion: nil)
+            present(alertController, animated: true, completion: nil)
             
         }
     }
