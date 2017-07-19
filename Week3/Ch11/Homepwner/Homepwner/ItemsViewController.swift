@@ -101,7 +101,7 @@ class ItemsViewController: UITableViewController {
         let newItem = itemStore.createItem()
         
         guard let index = itemStore.allItems.index(of: newItem) else {
-            print("Index is not valid")
+            assertionFailure("index is nil")
             return
         }
         
