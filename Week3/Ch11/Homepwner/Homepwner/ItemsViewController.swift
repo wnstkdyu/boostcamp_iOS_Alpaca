@@ -16,8 +16,8 @@ class ItemsViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // 상태 바의 높이를 얻는다.
         let statusBarHeight = UIApplication.shared.statusBarFrame.height
+        
         // 테이블뷰의 컨텐트 인셋과 스크롤 표시자의 인셋의 높이를 스테이터스 바의 높이와 같게 한다.
         let insets = UIEdgeInsets(top: statusBarHeight, left: 0, bottom: 0, right: 0)
         tableView.contentInset = insets
@@ -30,22 +30,18 @@ class ItemsViewController: UITableViewController {
     
     // 표시해야 할 행의 개수를 리턴
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // itemStore 안의 item 갯수만큼 행을 반환
         return itemStore.allItems.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        // 재사용 셀이나 새로운 셀을 얻는다.
         let cell = tableView.dequeueReusableCell(withIdentifier: "ItemCell", for: indexPath) as! ItemCell
         
-        // 선호하는 텍스트 크기로 라벨을 업데이트한다
         cell.updateLabels()
         
         // 물품 배열의 n번째에 있는 항목의 설명을 n과 row가 일치하는 셀의 텍스트로 설정한다
         // 이 셀은 테이블 뷰의 n번째 행에 나타난다.
         let item = itemStore.allItems[indexPath.row]
         
-        // Item을 가지고 셀을 설정한다.
         cell.nameLabel.text = item.name
         cell.serialNumberLabel.text = item.serialNumber
         cell.valueLabel.text = "$\(item.valueInDollars)"
@@ -77,7 +73,6 @@ class ItemsViewController: UITableViewController {
                                                 tableView.deleteRows(at: [indexPath], with: .automatic)})
             ac.addAction(deleteAction)
             
-            // 알림창 컨트롤러를 표시한다.
             present(ac, animated: true, completion: nil)
             
 //            // 저장소에서 그 항목을 제거한다.
@@ -103,10 +98,8 @@ class ItemsViewController: UITableViewController {
 //        // 테이블에 새로운 행을 삽입한다.
 //        tableView.insertRows(at: [indexPath], with: .automatic)
         
-        // 새 물품을 만들고 그것을 저장소에 추가한다.
         let newItem = itemStore.createItem()
         
-        // 배열 안에서 이 항목의 위치를 계산한다.
         guard let index = itemStore.allItems.index(of: newItem) else {
             fatalError()
         }
@@ -117,18 +110,13 @@ class ItemsViewController: UITableViewController {
     }
     
     @IBAction func toggleEditingMode(sender: AnyObject) {
-        // 현재 편집 모드이면
         if isEditing {
-            // 사용자에게 상태를 알리기 위해 버튼의 텍스트를 변경한다.
             sender.setTitle("Edit", for: .normal)
             
-            // 편집 모드를 끈다.
             setEditing(false, animated: true)
         } else {
-            // 사용자에게 상태를 알리기 위해 버튼의 텍스트를 변경한다.
             sender.setTitle("Done", for: .normal)
             
-            // 편집 모드로 들어간다.
             setEditing(true, animated: true)
         }
         
