@@ -11,10 +11,10 @@ import UIKit
 class MyButton: UIView, UIGestureRecognizerDelegate {
     
     var stateLabel: UILabel = UILabel()
-    var backGroundImageView: UIImageView!
-    var tapGestureRecognizer: UITapGestureRecognizer!
-    var longPressGestureRecognizer: UILongPressGestureRecognizer!
-    var controlState: UIControlState!
+    var backGroundImageView: UIImageView = UIImageView()
+    var tapGestureRecognizer: UITapGestureRecognizer = UITapGestureRecognizer()
+    var longPressGestureRecognizer: UILongPressGestureRecognizer = UILongPressGestureRecognizer()
+    var controlState: UIControlState = .normal
     
     
     override init(frame: CGRect) {
@@ -79,7 +79,6 @@ class MyButton: UIView, UIGestureRecognizerDelegate {
         
         /* controlState */
         // controlState의 상태 초기화
-        controlState = UIControlState.normal
         stateLabel.text = "normal"
         stateLabel.textColor = UIColor.yellow
     }
