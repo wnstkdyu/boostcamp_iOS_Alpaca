@@ -101,12 +101,11 @@ class ItemsViewController: UITableViewController {
         let item = itemStore.allItems[indexPath.row]
         
         // removeCell 버튼을 설정한다.
-        let removeCellButton = UITableViewRowAction(style: .destructive, title: "Remove",
-                                                    handler: { (action) -> Void in
-                                                        // 저장소에서 그 항목을 제거한다.
-                                                        self.itemStore.removeItem(item: item)
-                                                        // 또한 애니메이션과 함께 테이블 뷰에서 그 행을 제거한다.
-                                                        tableView.deleteRows(at: [indexPath], with: .automatic)})
+        let removeCellButton = UITableViewRowAction(style: .destructive, title: "Remove", handler: { (action) -> Void in
+            // 저장소에서 그 항목을 제거한다.
+            self.itemStore.removeItem(item: item)
+            // 또한 애니메이션과 함께 테이블 뷰에서 그 행을 제거한다.
+            tableView.deleteRows(at: [indexPath], with: .automatic)})
         
         return [removeCellButton]
     }
@@ -119,9 +118,9 @@ class ItemsViewController: UITableViewController {
         
         if indexPath == lastIndexPath {
             return false
-        } else {
-            return true
         }
+        
+        return true
     }
     
     /* 금메달 과제: 재정렬 완전히 막기 */
@@ -132,9 +131,9 @@ class ItemsViewController: UITableViewController {
         
         if indexPath == lastIndexPath {
             return false
-        } else {
-            return true
         }
+        
+        return true
     }
     
     override func tableView(_ tableView: UITableView, targetIndexPathForMoveFromRowAt sourceIndexPath: IndexPath, toProposedIndexPath proposedDestinationIndexPath: IndexPath) -> IndexPath {
