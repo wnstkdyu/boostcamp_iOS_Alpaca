@@ -67,6 +67,16 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
         item.valueInDollars = value.intValue
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ShowDate" {
+            guard let datePickerViewController = segue.destination as? DatePickerViewController else {
+                assertionFailure("There is no DatePickerViewController")
+                return
+            }
+            datePickerViewController.item = item
+        }
+    }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
