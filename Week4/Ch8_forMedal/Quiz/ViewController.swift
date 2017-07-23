@@ -62,19 +62,34 @@ class ViewController: UIViewController {
         self.nextQuestionLabelCenterXConstraint.constant = 0
         self.currentQuestionLabelCenterXConstraint.constant += screenWidth
         
-        UIView.animate(withDuration: 0.5, delay: 0, options: [.curveLinear],
-                       animations: {
-                        self.currentQuestionLabel.alpha = 0
-                        self.nextQuestionLabel.alpha = 1
-                        
-                        self.view.layoutIfNeeded()
-                       },
+//        UIView.animate(withDuration: 0.5, delay: 0, options: [.curveLinear],
+//                       animations: {
+//                        self.currentQuestionLabel.alpha = 0
+//                        self.nextQuestionLabel.alpha = 1
+//                        
+//                        self.view.layoutIfNeeded()
+//                       },
+//                       completion: { _ in
+//                        swap(&self.currentQuestionLabel, &self.nextQuestionLabel)
+//                        swap(&self.currentQuestionLabelCenterXConstraint, &self.nextQuestionLabelCenterXConstraint)
+//                        
+//                        self.updateOffScreenLabel()
+//                       })
+        UIView.animate(withDuration: 0.5,
+                       delay: 0,
+                       usingSpringWithDamping: 0.5,
+                       initialSpringVelocity: 0.5,
+                       options: [.curveLinear],
+                       animations: { self.currentQuestionLabel.alpha = 0
+                                    self.nextQuestionLabel.alpha = 1
+            
+                                    self.view.layoutIfNeeded() },
                        completion: { _ in
-                        swap(&self.currentQuestionLabel, &self.nextQuestionLabel)
-                        swap(&self.currentQuestionLabelCenterXConstraint, &self.nextQuestionLabelCenterXConstraint)
-                        
-                        self.updateOffScreenLabel()
-                       })
+                                    swap(&self.currentQuestionLabel, &self.nextQuestionLabel)
+                                    swap(&self.currentQuestionLabelCenterXConstraint, &self.nextQuestionLabelCenterXConstraint)
+        
+                                    self.updateOffScreenLabel() }
+        )
     }
     
     func updateOffScreenLabel() {
