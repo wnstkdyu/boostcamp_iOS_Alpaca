@@ -14,7 +14,12 @@ class ItemsViewController: UITableViewController {
     var itemStore: ItemStore!
     
     
-    // 테이블 헤더 뷰 구현
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        
+        navigationItem.leftBarButtonItem = editButtonItem
+    }
+    
     @IBAction func addNewItem(sender: AnyObject) {
         let newItem = itemStore.createItem()
         
@@ -29,31 +34,17 @@ class ItemsViewController: UITableViewController {
         tableView.insertRows(at: [indexPath], with: .automatic)
     }
     
-    @IBAction func toggleEditingMode(sender: AnyObject) {
-        if isEditing {
-            sender.setTitle("Edit", for: .normal)
-            
-            setEditing(false, animated: true)
-        } else {
-            sender.setTitle("Done", for: .normal)
-            
-            setEditing(true, animated: true)
-        }
-        
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let statusBarHeight = UIApplication.shared.statusBarFrame.height
-        
-        // 테이블뷰의 컨텐트 인셋과 스크롤 표시자의 인셋의 높이를 스테이터스 바의 높이와 같게 한다.
-        let insets = UIEdgeInsets(top: statusBarHeight, left: 0, bottom: 0, right: 0)
-        tableView.contentInset = insets
-        tableView.scrollIndicatorInsets = insets
-        
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 65
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        tableView.reloadData()
     }
     
     // 표시해야 할 행의 개수를 리턴
