@@ -33,6 +33,6 @@ class CustomTextField: UITextField {
     }
     
     func resetBorder() {
-        self.borderStyle = .line
+        self.borderStyle = .roundedRect
     }
 }
