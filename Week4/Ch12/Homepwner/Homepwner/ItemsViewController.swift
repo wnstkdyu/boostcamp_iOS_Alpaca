@@ -13,6 +13,35 @@ class ItemsViewController: UITableViewController {
     // ItemStore용 프로퍼티 추가
     var itemStore: ItemStore!
     
+    
+    // 테이블 헤더 뷰 구현
+    @IBAction func addNewItem(sender: AnyObject) {
+        let newItem = itemStore.createItem()
+        
+        guard let index = itemStore.allItems.index(of: newItem) else {
+            assertionFailure("index is nil")
+            return
+        }
+        
+        let indexPath = IndexPath(row: index, section: 0)
+        
+        // 테이블에 새로운 행을 삽입한다.
+        tableView.insertRows(at: [indexPath], with: .automatic)
+    }
+    
+    @IBAction func toggleEditingMode(sender: AnyObject) {
+        if isEditing {
+            sender.setTitle("Edit", for: .normal)
+            
+            setEditing(false, animated: true)
+        } else {
+            sender.setTitle("Done", for: .normal)
+            
+            setEditing(true, animated: true)
+        }
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -82,31 +111,18 @@ class ItemsViewController: UITableViewController {
         itemStore.moveItemAtIndex(fromIndex: sourceIndexPath.row, toIndex: destinationIndexPath.row)
     }
     
-    // 테이블 헤더 뷰 구현
-    @IBAction func addNewItem(sender: AnyObject) {
-        let newItem = itemStore.createItem()
-        
-        guard let index = itemStore.allItems.index(of: newItem) else {
-            assertionFailure("index is nil")
-            return
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ShowItem" {
+            guard let row = tableView.indexPathForSelectedRow?.row else {
+                assertionFailure("Cell is unselected")
+                return
+            }
+            let item = itemStore.allItems[row]
+            guard let detailViewController = segue.destination as? DetailViewController else {
+                assertionFailure("There is no DetailViewControlller")
+                return
+            }
+            detailViewController.item = item
         }
-        
-        let indexPath = IndexPath(row: index, section: 0)
-        
-        // 테이블에 새로운 행을 삽입한다.
-        tableView.insertRows(at: [indexPath], with: .automatic)
-    }
-    
-    @IBAction func toggleEditingMode(sender: AnyObject) {
-        if isEditing {
-            sender.setTitle("Edit", for: .normal)
-            
-            setEditing(false, animated: true)
-        } else {
-            sender.setTitle("Done", for: .normal)
-            
-            setEditing(true, animated: true)
-        }
-        
     }
 }
