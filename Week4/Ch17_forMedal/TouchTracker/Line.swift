@@ -14,6 +14,7 @@ struct Line {
     var end = CGPoint.zero {
         didSet {
             updateAngle()
+            print(self.angle)
         }
     }
     var angle = CGFloat()
@@ -29,7 +30,7 @@ struct Line {
     }
     
     mutating func updateAngle() {
-        let radian = atan2(-(self.end.y - self.begin.y), self.end.x - self.begin.y)
+        let radian = atan2(-(self.end.y - self.begin.y), self.end.x - self.begin.x)
         let degree = radian * 180 / CGFloat.pi
         self.angle = degree
     }
