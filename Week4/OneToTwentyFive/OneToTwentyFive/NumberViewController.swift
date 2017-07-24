@@ -31,7 +31,7 @@ class NumberViewController: UIViewController {
         super.viewDidLoad()
         
         for button in numberButtonCollection {
-            button.addTarget(self, action: #selector(gameLogicStart), for: .touchDown)
+            button.addTarget(self, action: #selector(gameLogic), for: .touchDown)
         }
         
         distributeNumber()
@@ -44,7 +44,7 @@ class NumberViewController: UIViewController {
         }
     }
     
-    func gameLogicStart() {
+    func gameLogic() {
         print(sortedNumberArray)
         let selectedIndex: Int = whichButtonSelected(buttonArray: numberButtonCollection)
         guard let selectedNumber: Int = (numberButtonCollection[selectedIndex].titleLabel?.text as NSString?)?.integerValue else {
@@ -52,16 +52,23 @@ class NumberViewController: UIViewController {
             return
         }
         
-        if sortedNumberArray.first == selectedNumber {
-            sortedNumberArray.removeFirst()
-            
-            let selectedBtn = numberButtonCollection[selectedIndex]
-            selectedBtn.isEnabled = false
-            selectedBtn.backgroundColor = UIColor.white
-        } else {
-            print("Wrong Order")
+        guard sortedNumberArray.first == selectedNumber else {
+            print("Wrong order")
+            return
         }
+        sortedNumberArray.removeFirst()
         
+        let selectedBtn = numberButtonCollection[selectedIndex]
+        selectedBtn.isEnabled = false
+        selectedBtn.backgroundColor = UIColor.white
+        
+        // 클리어 조건 검사
+        if sortedNumberArray.count == 0 {
+            print("Clear!")
+            showClearAlert()
+            
+            return
+        }
     }
     
     func whichButtonSelected(buttonArray: [UIButton]) -> Int {
@@ -73,5 +80,20 @@ class NumberViewController: UIViewController {
         }
         
         return selectedIndex
+    }
+    
+    func showClearAlert() {
+        let title = "Clear!"
+        let message = "Enter your name"
+        let clearAlert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+        clearAlert.addTextField(configurationHandler: nil)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let okayAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        clearAlert.addAction(cancelAction)
+        clearAlert.addAction(okayAction)
+        
+        present(clearAlert, animated: true, completion: nil)
     }
 }
