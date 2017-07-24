@@ -17,6 +17,13 @@ class NumberViewController: UIViewController {
     var numberArray = [8, 18, 4, 2, 5, 22, 15, 16, 11, 7, 25, 1, 23, 10, 12, 6, 13, 9, 21, 19, 3, 17, 24, 20, 14]
     var sortedNumberArray = [Int]()
     
+    var timer: Timer?
+    var startTime: Double = 0
+    var finishTime: Date = Date()
+    
+    var historyStoreIndex: Int = 0
+    var historyStore = HistoryStore()
+    
     
     // MARK: Function
     @IBAction func homeButton(_ sender: Any) {
@@ -25,6 +32,9 @@ class NumberViewController: UIViewController {
     
     @IBAction func pressStartButton(_ sender: Any) {
         pressToStartBtn.isHidden = true
+        
+        // timer시작
+        timerSet()
     }
     
     override func viewDidLoad() {
@@ -45,7 +55,7 @@ class NumberViewController: UIViewController {
     }
     
     func gameLogic() {
-        print(sortedNumberArray)
+        
         let selectedIndex: Int = whichButtonSelected(buttonArray: numberButtonCollection)
         guard let selectedNumber: Int = (numberButtonCollection[selectedIndex].titleLabel?.text as NSString?)?.integerValue else {
             assertionFailure("Cannot downcast")
@@ -63,10 +73,18 @@ class NumberViewController: UIViewController {
         selectedBtn.backgroundColor = UIColor.white
         
         // 클리어 조건 검사
-        if sortedNumberArray.count == 0 {
+        if sortedNumberArray.count == 24 {
             print("Clear!")
             showClearAlert()
             
+            timer?.invalidate()
+            pressToStartBtn.isHidden = false
+            
+            historyStore.createEmptyHistory()
+            guard let finishTime = timeLabel.text else {
+                return
+            }
+            historyStore.allHistory[historyStoreIndex].finishTime = finishTime
             return
         }
     }
@@ -89,11 +107,56 @@ class NumberViewController: UIViewController {
         
         clearAlert.addTextField(configurationHandler: nil)
         
+        guard let nameText = clearAlert.textFields?.first?.text else {
+            return
+        }
+        historyStore.allHistory[historyStoreIndex].name = nameText
+        
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         let okayAction = UIAlertAction(title: "OK", style: .default, handler: nil)
         clearAlert.addAction(cancelAction)
         clearAlert.addAction(okayAction)
         
-        present(clearAlert, animated: true, completion: nil)
+        present(clearAlert,
+                animated: true,
+                completion: { self.historyStore.allHistory[self.historyStoreIndex].dateCreated = self.showNowDate();
+                    self .historyStoreIndex += 1;})
     }
+    
+    // time 관련
+    func timerSet() {
+        self.timer?.invalidate()
+        self.timer = nil
+        
+        self.finishTime = Date()
+        timeLabel.text = "00:00"
+        
+        startTime = Date().timeIntervalSinceReferenceDate
+        timer = Timer.scheduledTimer(timeInterval: 0.05,
+                                     target: self,
+                                     selector: #selector(updateTime),
+                                     userInfo: nil,
+                                     repeats: true)
+    }
+    
+    func updateTime() {
+        let dateFormat = DateFormatter()
+        dateFormat.dateFormat = "mm:ss:SS"
+        
+        let referenceDate = Date(timeIntervalSince1970: 0)
+        finishTime = referenceDate + Date().timeIntervalSinceReferenceDate - startTime
+        self.timeLabel.text = dateFormat.string(from: finishTime)
+    }
+    
+    func showNowDate() -> String {
+        let date = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy.mm.dd hh:mm:ss"
+        
+        let currentDate = dateFormatter.string(from: date)
+        
+        return currentDate
+    }
+    
+    // history 보내주기
 }
