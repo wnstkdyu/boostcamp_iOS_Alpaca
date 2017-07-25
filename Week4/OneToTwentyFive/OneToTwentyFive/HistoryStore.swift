@@ -23,4 +23,9 @@ class HistoryStore {
     var topRecord = History()
     
     init() { }
+    
+    func removeHistory(history: History) {
+        guard let index = allHistory.index(of: history) else { return }
+        allHistory.remove(at: index)
+    }
 }

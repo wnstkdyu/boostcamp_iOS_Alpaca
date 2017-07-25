@@ -24,17 +24,9 @@ class NumberViewController: UIViewController {
     var startTime: Double = 0
     var finishTime: Date = Date()
     
-    var newHistory: History? = History()
+    var newHistory = History()
     var historyStore = HistoryStore.sharedInstance
-    
-    var filePath: String {
-        let manager = FileManager.default
-        guard let url = manager.urls(for: .documentDirectory, in: .userDomainMask).first else {
-            return ""
-        }
-        print("\(url)")
-        return url.appendingPathComponent("Data").path
-    }
+
     
     // MARK: Function
     @IBAction func homeButton(_ sender: Any) {
@@ -51,9 +43,6 @@ class NumberViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        topRecordLabel.text = historyStore.topRecord.finishTime
-        topRecordNameLabel.text = historyStore.topRecord.name
-        
         for button in numberButtonCollection {
             button.addTarget(self, action: #selector(gameLogic), for: .touchDown)
         }
@@ -61,6 +50,12 @@ class NumberViewController: UIViewController {
         distributeNumber()
         sortedNumberArray = numberArray.sorted{ $0 < $1 }
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        updateTopRecord()
     }
     
     func distributeNumber() {
@@ -101,8 +96,8 @@ class NumberViewController: UIViewController {
             guard let finishTime = timeLabel.text else {
                 return
             }
-            newHistory?.finishTime = finishTime
-            newHistory?.dateCreated = showNowDate()
+            newHistory.finishTime = finishTime
+            newHistory.dateCreated = showNowDate()
             
             return
         }
@@ -131,9 +126,9 @@ class NumberViewController: UIViewController {
                                                 self.resetGame()})
         let okayAction = UIAlertAction(title: "OK", style: .default,
                                        handler: { (UIAlertAction) in
-                                                self.newHistory?.name = (clearAlert.textFields?.first?.text)!;
-                                                print(self.newHistory?.name)
-                                                self.saveHistory(history: self.newHistory);
+                                                self.newHistory.name = (clearAlert.textFields?.first?.text)!;
+                                                print(self.newHistory.name);
+                                                self.historyStore.allHistory.append(self.newHistory)
                                                 self.resetGame()})
         
         clearAlert.addAction(cancelAction)
@@ -146,7 +141,7 @@ class NumberViewController: UIViewController {
     }
     
     func resetGame() {
-        newHistory = nil
+        newHistory = History()
         for button in numberButtonCollection {
             button.isEnabled = true
             button.backgroundColor = UIColor.black
@@ -195,11 +190,5 @@ class NumberViewController: UIViewController {
         
         return currentDate
     }
-    
-    // history 저장
-    private func saveHistory(history: History?) {
-        guard let realHistory = history else { return }
-        historyStore.allHistory.append(realHistory)
-        NSKeyedArchiver.archiveRootObject(self.historyStore.allHistory, toFile: filePath)
-    }    
+
 }

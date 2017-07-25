@@ -28,6 +28,16 @@ class HistoryListViewController: UIViewController, UITableViewDataSource, UITabl
         
         self.historyTableView.dataSource = self
         self.historyTableView.delegate = self
+        
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let history = historyStore.allHistory[indexPath.row]
+            historyStore.removeHistory(history: history)
+            
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+        }
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -48,4 +58,9 @@ class HistoryListViewController: UIViewController, UITableViewDataSource, UITabl
         
         return cell
     }
+    @IBAction func resetHistory(_ sender: Any) {
+        historyStore.allHistory.removeAll()
+        self.historyTableView.reloadData()
+    }
+    
 }
