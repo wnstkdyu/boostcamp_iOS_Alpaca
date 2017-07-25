@@ -9,11 +9,18 @@
 import UIKit
 
 class HistoryStore {
-    var allHistory = [History]()
-    
-    func createEmptyHistory() {
-        let newHistory = History()
-        
-        allHistory.append(newHistory)
+    static let sharedInstance = HistoryStore()
+    var allHistory: [History] = [] {
+        didSet {
+            let sortedHistory = self.allHistory.sorted{ $0.0.finishTime < $0.1.finishTime }
+            allHistory = sortedHistory
+            if let firstRecord = self.allHistory.first {
+                topRecord = firstRecord
+            }
+        }
     }
+    
+    var topRecord = History()
+    
+    init() { }
 }

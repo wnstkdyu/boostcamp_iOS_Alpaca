@@ -16,6 +16,7 @@
 		7D01F6F51F26463400E77D0C /* HistoryListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D01F6F41F26463400E77D0C /* HistoryListViewController.swift */; };
 		7D01F6F71F2648AC00E77D0C /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D01F6F61F2648AC00E77D0C /* History.swift */; };
 		7D01F6F91F264B2800E77D0C /* HistoryStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D01F6F81F264B2800E77D0C /* HistoryStore.swift */; };
+		7D01F6FB1F2674D300E77D0C /* HistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D01F6FA1F2674D300E77D0C /* HistoryCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		7D01F6F41F26463400E77D0C /* HistoryListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryListViewController.swift; sourceTree = "<group>"; };
 		7D01F6F61F2648AC00E77D0C /* History.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = History.swift; sourceTree = "<group>"; };
 		7D01F6F81F264B2800E77D0C /* HistoryStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryStore.swift; sourceTree = "<group>"; };
+		7D01F6FA1F2674D300E77D0C /* HistoryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +67,7 @@
 				7D01F6D71F25AE1600E77D0C /* AppDelegate.swift */,
 				7D01F6D91F25AE1600E77D0C /* ViewController.swift */,
 				7D01F6DB1F25AE1600E77D0C /* Main.storyboard */,
+				7D01F6FA1F2674D300E77D0C /* HistoryCell.swift */,
 				7D01F6F41F26463400E77D0C /* HistoryListViewController.swift */,
 				7D01F6F61F2648AC00E77D0C /* History.swift */,
 				7D01F6F81F264B2800E77D0C /* HistoryStore.swift */,
@@ -150,6 +153,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7D01F6F51F26463400E77D0C /* HistoryListViewController.swift in Sources */,
+				7D01F6FB1F2674D300E77D0C /* HistoryCell.swift in Sources */,
 				7D01F6EE1F25CF0100E77D0C /* NumberViewController.swift in Sources */,
 				7D01F6DA1F25AE1600E77D0C /* ViewController.swift in Sources */,
 				7D01F6D81F25AE1600E77D0C /* AppDelegate.swift in Sources */,

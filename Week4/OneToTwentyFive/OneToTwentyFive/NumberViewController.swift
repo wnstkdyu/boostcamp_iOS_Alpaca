@@ -8,11 +8,14 @@
 
 import UIKit
 
+
 class NumberViewController: UIViewController {
     // MARK: Properties
     @IBOutlet var numberButtonCollection: [UIButton]!
-    @IBOutlet var pressToStartBtn: UIButton!
-    @IBOutlet var timeLabel: UILabel!
+    @IBOutlet weak var pressToStartBtn: UIButton!
+    @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var topRecordLabel: UILabel!
+    @IBOutlet weak var topRecordNameLabel: UILabel!
     
     var numberArray = [8, 18, 4, 2, 5, 22, 15, 16, 11, 7, 25, 1, 23, 10, 12, 6, 13, 9, 21, 19, 3, 17, 24, 20, 14]
     var sortedNumberArray = [Int]()
@@ -21,9 +24,17 @@ class NumberViewController: UIViewController {
     var startTime: Double = 0
     var finishTime: Date = Date()
     
-    var historyStoreIndex: Int = 0
-    var historyStore = HistoryStore()
+    var newHistory: History? = History()
+    var historyStore = HistoryStore.sharedInstance
     
+    var filePath: String {
+        let manager = FileManager.default
+        guard let url = manager.urls(for: .documentDirectory, in: .userDomainMask).first else {
+            return ""
+        }
+        print("\(url)")
+        return url.appendingPathComponent("Data").path
+    }
     
     // MARK: Function
     @IBAction func homeButton(_ sender: Any) {
@@ -40,12 +51,16 @@ class NumberViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        topRecordLabel.text = historyStore.topRecord.finishTime
+        topRecordNameLabel.text = historyStore.topRecord.name
+        
         for button in numberButtonCollection {
             button.addTarget(self, action: #selector(gameLogic), for: .touchDown)
         }
         
         distributeNumber()
         sortedNumberArray = numberArray.sorted{ $0 < $1 }
+        
     }
     
     func distributeNumber() {
@@ -64,6 +79,7 @@ class NumberViewController: UIViewController {
         
         guard sortedNumberArray.first == selectedNumber else {
             print("Wrong order")
+            
             return
         }
         sortedNumberArray.removeFirst()
@@ -75,16 +91,19 @@ class NumberViewController: UIViewController {
         // 클리어 조건 검사
         if sortedNumberArray.count == 24 {
             print("Clear!")
-            showClearAlert()
+            
             
             timer?.invalidate()
             pressToStartBtn.isHidden = false
             
-            historyStore.createEmptyHistory()
+            newHistory = History()
+            showClearAlert()
             guard let finishTime = timeLabel.text else {
                 return
             }
-            historyStore.allHistory[historyStoreIndex].finishTime = finishTime
+            newHistory?.finishTime = finishTime
+            newHistory?.dateCreated = showNowDate()
+            
             return
         }
     }
@@ -106,21 +125,40 @@ class NumberViewController: UIViewController {
         let clearAlert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         
         clearAlert.addTextField(configurationHandler: nil)
+
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel,
+                                         handler: { (UIAlertAction) in
+                                                self.resetGame()})
+        let okayAction = UIAlertAction(title: "OK", style: .default,
+                                       handler: { (UIAlertAction) in
+                                                self.newHistory?.name = (clearAlert.textFields?.first?.text)!;
+                                                print(self.newHistory?.name)
+                                                self.saveHistory(history: self.newHistory);
+                                                self.resetGame()})
         
-        guard let nameText = clearAlert.textFields?.first?.text else {
-            return
-        }
-        historyStore.allHistory[historyStoreIndex].name = nameText
-        
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        let okayAction = UIAlertAction(title: "OK", style: .default, handler: nil)
         clearAlert.addAction(cancelAction)
         clearAlert.addAction(okayAction)
         
         present(clearAlert,
                 animated: true,
-                completion: { self.historyStore.allHistory[self.historyStoreIndex].dateCreated = self.showNowDate();
-                    self .historyStoreIndex += 1;})
+                completion: nil)
+        
+    }
+    
+    func resetGame() {
+        newHistory = nil
+        for button in numberButtonCollection {
+            button.isEnabled = true
+            button.backgroundColor = UIColor.black
+        }
+        sortedNumberArray = numberArray.sorted{ $0 < $1 }
+        
+        updateTopRecord()
+    }
+    
+    func updateTopRecord() {
+        topRecordLabel.text = historyStore.topRecord.finishTime
+        topRecordNameLabel.text = historyStore.topRecord.name
     }
     
     // time 관련
@@ -158,5 +196,10 @@ class NumberViewController: UIViewController {
         return currentDate
     }
     
-    // history 보내주기
+    // history 저장
+    private func saveHistory(history: History?) {
+        guard let realHistory = history else { return }
+        historyStore.allHistory.append(realHistory)
+        NSKeyedArchiver.archiveRootObject(self.historyStore.allHistory, toFile: filePath)
+    }    
 }
