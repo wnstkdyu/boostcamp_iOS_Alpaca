@@ -23,6 +23,11 @@ class HistoryListViewController: UIViewController, UITableViewDataSource, UITabl
         }
     }
     
+    @IBAction func resetHistory(_ sender: Any) {
+        historyStore.allHistory.removeAll()
+        self.historyTableView.reloadData()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -59,9 +64,6 @@ class HistoryListViewController: UIViewController, UITableViewDataSource, UITabl
         return cell
     }
     
-    @IBAction func resetHistory(_ sender: Any) {
-        historyStore.allHistory.removeAll()
-        self.historyTableView.reloadData()
-    }
+    
     
 }
