@@ -84,7 +84,7 @@ class NumberViewController: UIViewController {
         selectedBtn.backgroundColor = UIColor.white
         
         // 클리어 조건 검사
-        if sortedNumberArray.count == 24 {
+        if sortedNumberArray.count == 0 {
             print("Clear!")
             
             
@@ -152,8 +152,13 @@ class NumberViewController: UIViewController {
     }
     
     func updateTopRecord() {
-        topRecordLabel.text = historyStore.topRecord.finishTime
-        topRecordNameLabel.text = historyStore.topRecord.name
+        guard let topRecord = historyStore.topRecord else {
+            topRecordLabel.text = "--:--:--"
+            topRecordNameLabel.text = ""
+            return
+        }
+        topRecordLabel.text = topRecord.finishTime
+        topRecordNameLabel.text = topRecord.name
     }
     
     // time 관련

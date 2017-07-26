@@ -58,6 +58,7 @@ class HistoryListViewController: UIViewController, UITableViewDataSource, UITabl
         
         return cell
     }
+    
     @IBAction func resetHistory(_ sender: Any) {
         historyStore.allHistory.removeAll()
         self.historyTableView.reloadData()

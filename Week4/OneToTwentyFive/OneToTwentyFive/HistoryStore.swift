@@ -16,11 +16,13 @@ class HistoryStore {
             allHistory = sortedHistory
             if let firstRecord = self.allHistory.first {
                 topRecord = firstRecord
+            } else {
+                topRecord = nil
             }
         }
     }
     
-    var topRecord = History()
+    var topRecord: History? = History()
     
     init() { }
     
