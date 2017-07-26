@@ -17,8 +17,13 @@ class NumberViewController: UIViewController {
     @IBOutlet weak var topRecordLabel: UILabel!
     @IBOutlet weak var topRecordNameLabel: UILabel!
     
-    var numberArray = [8, 18, 4, 2, 5, 22, 15, 16, 11, 7, 25, 1, 23, 10, 12, 6, 13, 9, 21, 19, 3, 17, 24, 20, 14]
-    var sortedNumberArray = [Int]()
+    var numberArray: [Int] = {
+        var tempArray = [Int]()
+        for i in 1...25 {
+            tempArray.append(i)
+        }
+        return tempArray
+    }()
     
     var timer: Timer?
     var startTime: Double = 0
@@ -48,7 +53,6 @@ class NumberViewController: UIViewController {
         }
         
         distributeNumber()
-        sortedNumberArray = numberArray.sorted{ $0 < $1 }
         
     }
     
@@ -59,9 +63,24 @@ class NumberViewController: UIViewController {
     }
     
     func distributeNumber() {
-        for index in numberArray.indices {
-            numberButtonCollection[index].setTitle("\(numberArray[index])", for: .normal)
+        let randomArray = generateRandomArray(numArray: numberArray)
+        
+        for index in randomArray.indices {
+            numberButtonCollection[index].setTitle("\(randomArray[index])", for: .normal)
         }
+    }
+    
+    func generateRandomArray(numArray: [Int]) -> [Int] {
+        var randomArray: [Int] = []
+        var tempArray = numberArray
+        while randomArray.count != 25 {
+            let randomIndex: Int = Int(arc4random_uniform(25))
+            guard tempArray[randomIndex] != 0 else { continue }
+            randomArray.append(tempArray[randomIndex])
+            tempArray[randomIndex] = 0
+        }
+        
+        return randomArray
     }
     
     func gameLogic() {
@@ -72,19 +91,19 @@ class NumberViewController: UIViewController {
             return
         }
         
-        guard sortedNumberArray.first == selectedNumber else {
+        guard numberArray.first == selectedNumber else {
             print("Wrong order")
             
             return
         }
-        sortedNumberArray.removeFirst()
+        numberArray.removeFirst()
         
         let selectedBtn = numberButtonCollection[selectedIndex]
         selectedBtn.isEnabled = false
         selectedBtn.backgroundColor = UIColor.white
         
         // 클리어 조건 검사
-        if sortedNumberArray.count == 0 {
+        if numberArray.count == 0 {
             print("Clear!")
             
             
@@ -146,7 +165,13 @@ class NumberViewController: UIViewController {
             button.isEnabled = true
             button.backgroundColor = UIColor.black
         }
-        sortedNumberArray = numberArray.sorted{ $0 < $1 }
+        numberArray = {
+            var tempArray = [Int]()
+            for i in 1...25{
+                tempArray.append(i)
+            }
+            return tempArray
+        }()
         
         updateTopRecord()
     }
