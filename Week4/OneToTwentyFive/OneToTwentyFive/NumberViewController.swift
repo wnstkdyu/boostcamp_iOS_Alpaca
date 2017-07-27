@@ -26,7 +26,7 @@ class NumberViewController: UIViewController {
     }()
     
     var timer: Timer?
-    var startTime: Double = 0
+    var startTime: Date = Date()
     var finishTime: Date = Date()
     
     var newHistory = History()
@@ -194,7 +194,7 @@ class NumberViewController: UIViewController {
         self.finishTime = Date()
         timeLabel.text = "00:00"
         
-        startTime = Date().timeIntervalSinceReferenceDate
+        startTime = Date()
         timer = Timer.scheduledTimer(timeInterval: 0.05,
                                      target: self,
                                      selector: #selector(updateTime),
@@ -203,12 +203,20 @@ class NumberViewController: UIViewController {
     }
     
     func updateTime() {
-        let dateFormat = DateFormatter()
-        dateFormat.dateFormat = "mm:ss:SS"
+//        let dateFormat = DateFormatter()
+//        dateFormat.dateFormat = "mm:ss:SS"
+        let numberFormatter = NumberFormatter
+        numberFormatter.
         
-        let referenceDate = Date(timeIntervalSince1970: 0)
-        finishTime = referenceDate + Date().timeIntervalSinceReferenceDate - startTime
-        self.timeLabel.text = dateFormat.string(from: finishTime)
+        
+        finishTime = Date()
+        let startTimeInterval: TimeInterval = startTime.timeIntervalSince1970
+        let finishTimeInterval: TimeInterval = finishTime.timeIntervalSince1970
+        
+        let timeGap: TimeInterval = finishTimeInterval - startTimeInterval
+        
+//        finishTime = startTime.addingTimeInterval(timeGap)
+        self.timeLabel.text = String(timeGap)
     }
     
     func showNowDate() -> String {
@@ -221,4 +229,11 @@ class NumberViewController: UIViewController {
         return currentDate
     }
 
+}
+
+extension TimeInterval {
+    func setTimeText() {
+        var timeText: String = "mm:ss:SS"
+        
+    }
 }
