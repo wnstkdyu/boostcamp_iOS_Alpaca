@@ -15,7 +15,7 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet var valueField: CustomTextField!
     @IBOutlet var dateLabel: UILabel!
     
-    var item: Item! {
+    var item: Item = Item() {
         didSet {
             navigationItem.title = item.name
         }
@@ -39,6 +39,7 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
     @IBAction func backgroundTapped(_ sender: UITapGestureRecognizer) {
         view.endEditing(true)
     }
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -73,7 +74,7 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
                 assertionFailure("There is no DatePickerViewController")
                 return
             }
-            datePickerViewController.item = item
+            datePickerViewController.datePickerDelegate = self
         }
     }
     
@@ -81,4 +82,10 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
         textField.resignFirstResponder()
         return true
     }    
+}
+
+extension DetailViewController: DatePickerDelegate {
+    func didSelectDatePicker(date: Date) {
+        item.dateCreated = date
+    }
 }
