@@ -14,6 +14,7 @@ class Item: NSObject {
     var valueInDollars: Int
     var serialNumber: String?
     let dateCreated: Date
+    let itemKey: String
     
     // 지정 이니셜라이저
     init(name: String, serialNumber: String?, valueInDollars: Int) {
@@ -21,6 +22,7 @@ class Item: NSObject {
         self.valueInDollars = valueInDollars
         self.serialNumber = serialNumber
         self.dateCreated = Date()
+        self.itemKey = UUID().uuidString
         
         super.init()
     }

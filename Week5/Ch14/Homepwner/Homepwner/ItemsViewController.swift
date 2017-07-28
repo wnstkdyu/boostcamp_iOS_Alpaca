@@ -12,7 +12,7 @@ class ItemsViewController: UITableViewController {
     
     // ItemStore용 프로퍼티 추가
     var itemStore: ItemStore!
-    
+    var imageStore: ImageStore = ImageStore()
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -84,12 +84,16 @@ class ItemsViewController: UITableViewController {
             let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
             ac.addAction(cancelAction)
             
-            let deleteAction = UIAlertAction(title: "Delete", style: .destructive,
+            let deleteAction = UIAlertAction(title: "Delete",
+                                             style: .destructive,
                                              handler: { (action) -> Void in
                                                 // 저장소에서 그 항목을 제거한다.
                                                 self.itemStore.removeItem(item: item)
+                                                // 이미지 저장소에서 item의 이미지를 제거한다
+                                                self.imageStore.deleteImageForKey(key: item.itemKey)
                                                 // 또한 애니메이션과 함께 테이블 뷰에서 그 행을 제거한다.
-                                                tableView.deleteRows(at: [indexPath], with: .automatic)})
+                                                tableView.deleteRows(at: [indexPath], with: .automatic)
+                                             })
             ac.addAction(deleteAction)
             
             present(ac, animated: true, completion: nil)
@@ -114,6 +118,7 @@ class ItemsViewController: UITableViewController {
                 return
             }
             detailViewController.item = item
+            detailViewController.imageStore = imageStore
         }
     }
 }

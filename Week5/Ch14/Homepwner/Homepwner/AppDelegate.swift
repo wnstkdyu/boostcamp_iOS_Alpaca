@@ -20,6 +20,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // ItemStore의 인스턴스 생성
         let itemStore = ItemStore()
         
+        // ImageStore의 인스턴스 생성
+        let imageStore = ImageStore()
+        
         // ItemViewController에 접근하여 itemStore를 설정한다.
         guard let navController = window?.rootViewController as? UINavigationController else {
             return false
@@ -28,6 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return false
         }
         itemsController.itemStore = itemStore
+        itemsController.imageStore = imageStore
         
         return true
     }
