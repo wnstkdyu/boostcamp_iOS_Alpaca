@@ -14,6 +14,8 @@
 		7D01F7991F2F4C8700E77D0C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D01F7981F2F4C8700E77D0C /* LoginViewController.swift */; };
 		7D01F79C1F2F4CCE00E77D0C /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D01F79B1F2F4CCE00E77D0C /* SignupViewController.swift */; };
 		7D01F79E1F2FA11300E77D0C /* ImageBoardAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D01F79D1F2FA11300E77D0C /* ImageBoardAPI.swift */; };
+		7D8360951F2FB0C500EB6B1B /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D8360941F2FB0C500EB6B1B /* Request.swift */; };
+		7D8360971F2FB49700EB6B1B /* ObjectInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D8360961F2FB49700EB6B1B /* ObjectInfo.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,8 @@
 		7D01F7981F2F4C8700E77D0C /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = ../LoginViewController.swift; sourceTree = "<group>"; };
 		7D01F79B1F2F4CCE00E77D0C /* SignupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
 		7D01F79D1F2FA11300E77D0C /* ImageBoardAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageBoardAPI.swift; sourceTree = SOURCE_ROOT; };
+		7D8360941F2FB0C500EB6B1B /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
+		7D8360961F2FB49700EB6B1B /* ObjectInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectInfo.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +86,8 @@
 			isa = PBXGroup;
 			children = (
 				7D01F79D1F2FA11300E77D0C /* ImageBoardAPI.swift */,
+				7D8360941F2FB0C500EB6B1B /* Request.swift */,
+				7D8360961F2FB49700EB6B1B /* ObjectInfo.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -159,8 +165,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7D8360971F2FB49700EB6B1B /* ObjectInfo.swift in Sources */,
 				7D01F79C1F2F4CCE00E77D0C /* SignupViewController.swift in Sources */,
 				7D01F7991F2F4C8700E77D0C /* LoginViewController.swift in Sources */,
+				7D8360951F2FB0C500EB6B1B /* Request.swift in Sources */,
 				7D01F7871F2F481200E77D0C /* AppDelegate.swift in Sources */,
 				7D01F79E1F2FA11300E77D0C /* ImageBoardAPI.swift in Sources */,
 			);

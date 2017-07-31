@@ -8,10 +8,6 @@
 
 import Foundation
 
-enum Method: String {
-    
-}
-
 struct ImageBoardAPI {
-    
+    static let baseURLString = "https://ios-api.boostcamp.connect.or.kr"
 }

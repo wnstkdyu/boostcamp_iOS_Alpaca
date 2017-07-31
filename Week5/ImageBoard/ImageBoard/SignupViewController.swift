@@ -22,6 +22,9 @@ class SignupViewController: UIViewController {
     
     var signupViewControllerDelegate: SignupViewControllerDelegate?
     
+    let request = Request()
+    let baseURLString = ImageBoardAPI.baseURLString
+    
     // MARK: Functions
     @IBAction func dismissKeyboard(_ sender: UITapGestureRecognizer) {
         emailTextField.resignFirstResponder()
@@ -33,10 +36,11 @@ class SignupViewController: UIViewController {
     @IBAction func signUp(_ sender: Any) {
         guard checkEmptyTextField() else { return }
         guard checkPwValidity() else { return }
+        signupToServer(email: emailTextField.text!, password: pwTextField.text!, nickname: nickNameTextField.text!)
         
         navigationController?.popViewController(animated: true)
         signupViewControllerDelegate?.presentCompleteAC()
-        print("델리게이트야 일을해!")
+        
     }
     
     func checkEmptyTextField() -> Bool {
@@ -81,5 +85,40 @@ class SignupViewController: UIViewController {
         }
         
         return true
+    }
+    
+    func signupToServer(email: String, password: String, nickname: String) {
+        let signupURLString = baseURLString + "/user"
+        guard let signupURL = URL(string: signupURLString) else { return }
+        print("signupURL은 유효함!")
+        
+        let userData = UserInfo(_id: nil, nickname: nickname, password: password, email: email, __v: nil)
+        do {
+            let encodedUserData = try JSONEncoder().encode(userData)
+            let encodedUserDataString = String(data: encodedUserData, encoding: .utf8)
+            print(encodedUserDataString)
+            do {
+                try request.post(url: signupURL, body: encodedUserData) {
+                    (data, response, error) -> Void in
+                    guard let data = data else { return }
+                    do {
+                        let userData = try JSONDecoder().decode(UserInfo.self, from: data)
+                        print(userData)
+                    } catch {}
+                }
+            } catch {}
+        } catch {}
+        
+//        do {
+//            try request.post(url: signupURL, body: ) {
+//                (data, response, error) -> Void in
+//                guard let data = data else { return }
+//                do {
+//                    let userData = try JSONDecoder().decode(UserInfo.self, from: data)
+//                    print(userData)
+//                } catch {}
+//            }
+//        } catch {}
+        
     }
 }

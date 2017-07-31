@@ -10,13 +10,33 @@ import UIKit
 
 class LoginViewController: UIViewController {
     
-    // Mark: Functions
+    // MARK: Properties
+    let baseURLString = ImageBoardAPI.baseURLString
+    let request = Request()
+    
+    // MARK: Functions
+    @IBAction func pressLoginButton(_ sender: Any) {
+        guard let url = URL(string: baseURLString) else { return }
+        print("버튼눌림")
+        request.get(url: url) {
+            (data, response, error) in
+            guard let data = data else { return }
+            do {
+                let info = try JSONDecoder().decode([UserInfo].self, from: data)
+                print(info)
+                print(response ?? "")
+            } catch let error {
+                print(error)
+            }
+        }
+    }
+    
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard segue.identifier == "ShowSignup" else { return }
         guard let destinationVC = segue.destination as? SignupViewController else {
             return
         }
-        print("델리게이트 설정 완료")
         destinationVC.signupViewControllerDelegate = self
     }
     
@@ -31,6 +51,5 @@ extension LoginViewController: SignupViewControllerDelegate {
             ac.dismiss(animated: true, completion: nil) }
         ac.addAction(okayAction)
         present(ac, animated: true, completion: nil)
-        print("회원가입 완료")
     }
 }
