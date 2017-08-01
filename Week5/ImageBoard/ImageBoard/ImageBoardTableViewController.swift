@@ -19,6 +19,7 @@ class ImageBoardTableViewController: UITableViewController {
     // MARK: Functions
     override func viewDidLoad() {
         super.viewDidLoad()
+        startLoginView()
         
         getImageBoardData()
     }
@@ -32,6 +33,12 @@ class ImageBoardTableViewController: UITableViewController {
             print(imageBoardData)
             self.articleInfo = imageBoardData
         }
+    }
+    
+    func startLoginView() {
+        guard let loginViewController = storyboard?.instantiateViewController(
+            withIdentifier: "NavigationController") else { return }
+        present(loginViewController, animated: false, completion: nil)
     }
 }
 

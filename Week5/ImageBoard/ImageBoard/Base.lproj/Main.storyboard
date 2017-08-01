@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13168.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="dFD-lo-8w6">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13168.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Ays-Ya-ua9">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -14,7 +14,7 @@
         <!--로그인-->
         <scene sceneID="E4i-cB-cth">
             <objects>
-                <viewController id="9RK-h5-Upc" customClass="LoginViewController" customModule="ImageBoard" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewController" id="9RK-h5-Upc" customClass="LoginViewController" customModule="ImageBoard" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Jb7-tD-O9g"/>
                         <viewControllerLayoutGuide type="bottom" id="099-lU-B91"/>
@@ -27,13 +27,13 @@
                                 <rect key="frame" x="16" y="80" width="343" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Lze-hg-vts">
                                 <rect key="frame" x="16" y="118" width="343" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="huf-H8-Eor">
                                 <rect key="frame" x="168" y="164" width="39" height="30"/>
@@ -53,6 +53,7 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="Lze-hg-vts" firstAttribute="top" secondItem="TBP-14-Khu" secondAttribute="bottom" constant="8" id="DTg-ph-t6s"/>
                             <constraint firstItem="huf-H8-Eor" firstAttribute="top" secondItem="Lze-hg-vts" secondAttribute="bottom" constant="16" id="HDB-mp-uYq"/>
@@ -65,10 +66,23 @@
                             <constraint firstItem="Lze-hg-vts" firstAttribute="leading" secondItem="vKV-yR-O2L" secondAttribute="leadingMargin" id="i7p-Ar-BDz"/>
                             <constraint firstItem="huf-H8-Eor" firstAttribute="centerX" secondItem="Lze-hg-vts" secondAttribute="centerX" id="srQ-oH-c06"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="kjQ-m7-Vcv" appends="YES" id="UYl-W2-Tzo"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" title="로그인" id="Qbb-4p-OgM"/>
+                    <connections>
+                        <outlet property="emailTextField" destination="TBP-14-Khu" id="Jvq-Vq-ZPZ"/>
+                        <outlet property="pwTextField" destination="Lze-hg-vts" id="SC0-0k-tpx"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jpf-8y-sjG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="kjQ-m7-Vcv">
+                    <connections>
+                        <action selector="dismissKeyboard:" destination="9RK-h5-Upc" id="R1b-2G-zsW"/>
+                        <outlet property="delegate" destination="9RK-h5-Upc" id="KSx-it-jq7"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="760.79999999999995" y="-196.55172413793105"/>
         </scene>
@@ -242,7 +256,7 @@
         <!--Navigation Controller-->
         <scene sceneID="t9L-Kb-poy">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="dFD-lo-8w6" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="NavigationController" automaticallyAdjustsScrollViewInsets="NO" id="dFD-lo-8w6" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="ilu-sS-3rk">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -263,6 +277,7 @@
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="Ays-Ya-ua9" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Gjz-nr-tml">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>

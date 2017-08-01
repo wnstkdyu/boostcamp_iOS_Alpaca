@@ -83,31 +83,37 @@ class SignupViewController: UIViewController {
         let signupURLString = baseURLString + "/user"
         guard let signupURL = URL(string: signupURLString) else { return }
         
-        let signupPostString = "email=\(email)&password=\(password)&nickname=\(nickname)"
-        guard let signupBody = signupPostString.data(using: .utf8) else { return }
+        let signupDic: [String: String] = ["email": email, "password": password, "nickname": nickname]
+        guard let encodedSignupInfo = try? JSONEncoder().encode(signupDic) else { return }
+        
+//        let signupPostString = "email=\(email)&password=\(password)&nickname=\(nickname)"
+//        guard let signupBody = signupPostString.data(using: .utf8) else { return }
         
         do {
-            try request.post(url: signupURL, body: signupBody) {
+            try request.post(url: signupURL, body: encodedSignupInfo) {
                 (data, response, error) -> Void in
-                guard let httpResponse = response as? HTTPURLResponse else { return }
-                switch httpResponse.statusCode {
-                case 201:
-                    self.navigationController?.popViewController(animated: true)
-                    self.signupViewControllerDelegate?.presentCompleteAC()
-                case 403:
-                    let title = "알림"
-                    let message = "Code: \(httpResponse.statusCode)\n" + "Message: \(httpResponse.allHeaderFields)\n"
-                    
-                    let ac = UIAlertController(title: title, message: message, preferredStyle: .alert)
-                    let okayAction = UIAlertAction(title: "확인", style: .default) { (action) -> Void in
-                        ac.dismiss(animated: true, completion: nil)}
-                    ac.addAction(okayAction)
-                    
-                    self.present(ac, animated: true, completion: nil)
-                default:
-                    print(httpResponse.statusCode)
-                    return
+                OperationQueue.main.addOperation {
+                    guard let httpResponse = response as? HTTPURLResponse else { return }
+                    switch httpResponse.statusCode {
+                    case 201:
+                        self.navigationController?.popViewController(animated: true)
+                        self.signupViewControllerDelegate?.presentCompleteAC()
+                    case 403:
+                        let title = "알림"
+                        let message = "Code: \(httpResponse.statusCode)\n" + "Message: \(httpResponse.allHeaderFields)\n"
+                        
+                        let ac = UIAlertController(title: title, message: message, preferredStyle: .alert)
+                        let okayAction = UIAlertAction(title: "확인", style: .default) { (action) -> Void in
+                            ac.dismiss(animated: true, completion: nil)}
+                        ac.addAction(okayAction)
+                        
+                        self.present(ac, animated: true, completion: nil)
+                    default:
+                        print(httpResponse.statusCode)
+                        return
+                    }
                 }
+                
             }
         } catch {}
     }
