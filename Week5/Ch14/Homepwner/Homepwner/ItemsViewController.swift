@@ -71,33 +71,32 @@ class ItemsViewController: UITableViewController {
     // 테이블 행 삭제하기
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         // 테이블 뷰가 삭제 명령의 적용을 요청하면
-        if editingStyle == .delete {
-            let item = itemStore.allItems[indexPath.row]
-            
-            // alert의 메시지 작성
-            let title = "Delete \(item.name)?"
-            let message = "Are you sure you want to delete this item?"
-            
-            let ac = UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
-            
-            // actionSheet의 action 추가
-            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-            ac.addAction(cancelAction)
-            
-            let deleteAction = UIAlertAction(title: "Delete",
-                                             style: .destructive,
-                                             handler: { (action) -> Void in
-                                                // 저장소에서 그 항목을 제거한다.
-                                                self.itemStore.removeItem(item: item)
-                                                // 이미지 저장소에서 item의 이미지를 제거한다
-                                                self.imageStore.deleteImageForKey(key: item.itemKey)
-                                                // 또한 애니메이션과 함께 테이블 뷰에서 그 행을 제거한다.
-                                                tableView.deleteRows(at: [indexPath], with: .automatic)
-                                             })
-            ac.addAction(deleteAction)
-            
-            present(ac, animated: true, completion: nil)
-        }
+        guard editingStyle == .delete else { return }
+        let item = itemStore.allItems[indexPath.row]
+        
+        // alert의 메시지 작성
+        let title = "Delete \(item.name)?"
+        let message = "Are you sure you want to delete this item?"
+        
+        let ac = UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
+        
+        // actionSheet의 action 추가
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        ac.addAction(cancelAction)
+        
+        let deleteAction = UIAlertAction(title: "Delete",
+                                         style: .destructive,
+                                         handler: { (action) -> Void in
+                                            // 저장소에서 그 항목을 제거한다.
+                                            self.itemStore.removeItem(item: item)
+                                            // 이미지 저장소에서 item의 이미지를 제거한다
+                                            self.imageStore.deleteImageForKey(key: item.itemKey)
+                                            // 또한 애니메이션과 함께 테이블 뷰에서 그 행을 제거한다.
+                                            tableView.deleteRows(at: [indexPath], with: .automatic)
+                                         })
+        ac.addAction(deleteAction)
+        
+        present(ac, animated: true, completion: nil)
     }
     
     // 테이블 행 옮기기
