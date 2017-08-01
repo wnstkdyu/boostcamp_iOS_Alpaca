@@ -109,22 +109,22 @@
                                             </constraints>
                                         </imageView>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="4X2-Cd-CHF">
-                                            <rect key="frame" x="76.5" y="5" width="36" height="66.5"/>
+                                            <rect key="frame" x="76.5" y="5" width="90.5" height="66.5"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7FF-DU-C16">
-                                                    <rect key="frame" x="0.0" y="0.0" width="36" height="20.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="90.5" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Id" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0b8-oT-iEH">
-                                                    <rect key="frame" x="0.0" y="23" width="36" height="20.5"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Image Desc" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0b8-oT-iEH">
+                                                    <rect key="frame" x="0.0" y="23" width="90.5" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FCS-lz-SV0">
-                                                    <rect key="frame" x="0.0" y="46" width="36" height="20.5"/>
+                                                    <rect key="frame" x="0.0" y="46" width="90.5" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -145,7 +145,7 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="dateLabel" destination="FCS-lz-SV0" id="jDU-FV-rtK"/>
-                                    <outlet property="idLabel" destination="0b8-oT-iEH" id="Eus-9c-HNo"/>
+                                    <outlet property="imageDescLabel" destination="0b8-oT-iEH" id="L5k-pL-wYe"/>
                                     <outlet property="imageview" destination="BmE-Be-lZq" id="ZcV-My-0Bf"/>
                                     <outlet property="titleLabel" destination="7FF-DU-C16" id="csq-lw-yTo"/>
                                 </connections>

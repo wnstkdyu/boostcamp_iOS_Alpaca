@@ -42,11 +42,10 @@ class LoginViewController: UIViewController {
     func loginToServer(email: String, password: String) {
         let loginURLString = baseURLString + "/login"
         guard let loginURL = URL(string: loginURLString) else { return }
-        
-        let loginDic: [String: String] = ["email": email, "password": password]
-//        let loginPostString = "email=\(email)&password=\(password)"
-//        guard let loginBody = loginPostString.data(using: .utf8) else { return }
-        guard let loginBody = try? JSONEncoder().encode(loginDic) else { return }
+    
+        let loginInfo = LoginInfo(email: email, password: password)
+        guard let loginBody = try? JSONEncoder().encode(loginInfo) else { return }
+
         print(loginBody)
         do {
             try request.post(url: loginURL, body: loginBody) {

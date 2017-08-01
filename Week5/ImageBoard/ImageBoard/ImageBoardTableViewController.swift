@@ -19,9 +19,18 @@ class ImageBoardTableViewController: UITableViewController {
     // MARK: Functions
     override func viewDidLoad() {
         super.viewDidLoad()
-        startLoginView()
         
+        tableView.dataSource = self
+        tableView.delegate = self
+        
+        startLoginView()
         getImageBoardData()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        tableView.reloadData()
     }
     
     func getImageBoardData() {
@@ -29,9 +38,11 @@ class ImageBoardTableViewController: UITableViewController {
         request.get(url: getURL) {
             (data, response, error) -> Void in
             guard let data = data else { return }
+            print(data)
             guard let imageBoardData  =  try? JSONDecoder().decode([ArticleInfo].self, from: data) else { return }
             print(imageBoardData)
             self.articleInfo = imageBoardData
+            print(self.articleInfo)
         }
     }
     
@@ -53,7 +64,7 @@ extension ImageBoardTableViewController {
         
         cell.imageview.image = getImageFromURL(imageURLString: articleInfo[indexPath.row].thumb_image_url)
         cell.titleLabel.text = articleInfo[indexPath.row].image_title ?? ""
-        cell.idLabel.text = articleInfo[indexPath.row]._id ?? ""
+        cell.imageDescLabel.text = articleInfo[indexPath.row].image_desc ?? ""
         cell.dateLabel.text = String(describing: articleInfo[indexPath.row].created_at)
         
         return cell
@@ -72,9 +83,11 @@ extension ImageBoardTableViewController {
         
         let task = session.dataTask(with: request) {
             (data, response, error) -> Void in
-            guard let imageData = data else { return }
-            guard let image = UIImage(data: imageData) else { return }
-            resultImage = image
+            OperationQueue.main.addOperation {
+                guard let imageData = data else { return }
+                guard let image = UIImage(data: imageData) else { return }
+                resultImage = image
+            }
         }
         task.resume()
         

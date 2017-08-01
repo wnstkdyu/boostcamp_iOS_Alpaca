@@ -13,6 +13,6 @@ class ImageBoardCell: UITableViewCell {
     // MARK: Properties
     @IBOutlet var imageview: UIImageView!
     @IBOutlet var titleLabel: UILabel!
-    @IBOutlet var idLabel: UILabel!
+    @IBOutlet var imageDescLabel: UILabel!
     @IBOutlet var dateLabel: UILabel!
 }

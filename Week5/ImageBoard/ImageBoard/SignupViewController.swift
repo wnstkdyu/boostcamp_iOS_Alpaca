@@ -83,11 +83,8 @@ class SignupViewController: UIViewController {
         let signupURLString = baseURLString + "/user"
         guard let signupURL = URL(string: signupURLString) else { return }
         
-        let signupDic: [String: String] = ["email": email, "password": password, "nickname": nickname]
-        guard let encodedSignupInfo = try? JSONEncoder().encode(signupDic) else { return }
-        
-//        let signupPostString = "email=\(email)&password=\(password)&nickname=\(nickname)"
-//        guard let signupBody = signupPostString.data(using: .utf8) else { return }
+        let signupInfo = SignupInfo(email: email, password: password, nickname: nickname)
+        guard let encodedSignupInfo = try? JSONEncoder().encode(signupInfo) else { return }
         
         do {
             try request.post(url: signupURL, body: encodedSignupInfo) {
@@ -113,7 +110,6 @@ class SignupViewController: UIViewController {
                         return
                     }
                 }
-                
             }
         } catch {}
     }
