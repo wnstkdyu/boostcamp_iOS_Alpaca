@@ -37,10 +37,6 @@ class SignupViewController: UIViewController {
         guard checkEmptyTextField() else { return }
         guard checkPwValidity() else { return }
         signupToServer(email: emailTextField.text!, password: pwTextField.text!, nickname: nickNameTextField.text!)
-        
-        navigationController?.popViewController(animated: true)
-        signupViewControllerDelegate?.presentCompleteAC()
-        
     }
     
     func checkEmptyTextField() -> Bool {
@@ -60,10 +56,8 @@ class SignupViewController: UIViewController {
                 ac.addAction(okayAction)
                 
                 present(ac, animated: true, completion: nil)
-                
                 return false
         }
-        
         return true
     }
     
@@ -80,45 +74,41 @@ class SignupViewController: UIViewController {
             ac.addAction(okayAction)
             
             present(ac, animated: true, completion: nil)
-            
             return false
         }
-        
         return true
     }
     
     func signupToServer(email: String, password: String, nickname: String) {
         let signupURLString = baseURLString + "/user"
         guard let signupURL = URL(string: signupURLString) else { return }
-        print("signupURL은 유효함!")
         
-        let userData = UserInfo(_id: nil, nickname: nickname, password: password, email: email, __v: nil)
+        let signupPostString = "email=\(email)&password=\(password)&nickname=\(nickname)"
+        guard let signupBody = signupPostString.data(using: .utf8) else { return }
+        
         do {
-            let encodedUserData = try JSONEncoder().encode(userData)
-            let encodedUserDataString = String(data: encodedUserData, encoding: .utf8)
-            print(encodedUserDataString)
-            do {
-                try request.post(url: signupURL, body: encodedUserData) {
-                    (data, response, error) -> Void in
-                    guard let data = data else { return }
-                    do {
-                        let userData = try JSONDecoder().decode(UserInfo.self, from: data)
-                        print(userData)
-                    } catch {}
+            try request.post(url: signupURL, body: signupBody) {
+                (data, response, error) -> Void in
+                guard let httpResponse = response as? HTTPURLResponse else { return }
+                switch httpResponse.statusCode {
+                case 201:
+                    self.navigationController?.popViewController(animated: true)
+                    self.signupViewControllerDelegate?.presentCompleteAC()
+                case 403:
+                    let title = "알림"
+                    let message = "Code: \(httpResponse.statusCode)\n" + "Message: \(httpResponse.allHeaderFields)\n"
+                    
+                    let ac = UIAlertController(title: title, message: message, preferredStyle: .alert)
+                    let okayAction = UIAlertAction(title: "확인", style: .default) { (action) -> Void in
+                        ac.dismiss(animated: true, completion: nil)}
+                    ac.addAction(okayAction)
+                    
+                    self.present(ac, animated: true, completion: nil)
+                default:
+                    print(httpResponse.statusCode)
+                    return
                 }
-            } catch {}
+            }
         } catch {}
-        
-//        do {
-//            try request.post(url: signupURL, body: ) {
-//                (data, response, error) -> Void in
-//                guard let data = data else { return }
-//                do {
-//                    let userData = try JSONDecoder().decode(UserInfo.self, from: data)
-//                    print(userData)
-//                } catch {}
-//            }
-//        } catch {}
-        
     }
 }

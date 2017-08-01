@@ -16,19 +16,10 @@ class LoginViewController: UIViewController {
     
     // MARK: Functions
     @IBAction func pressLoginButton(_ sender: Any) {
-        guard let url = URL(string: baseURLString) else { return }
-        print("버튼눌림")
-        request.get(url: url) {
-            (data, response, error) in
-            guard let data = data else { return }
-            do {
-                let info = try JSONDecoder().decode([UserInfo].self, from: data)
-                print(info)
-                print(response ?? "")
-            } catch let error {
-                print(error)
-            }
-        }
+        let loginURLString = baseURLString + "/login"
+        guard let loginURL = URL(string: loginURLString) else { return }
+        
+        
     }
     
     
@@ -40,6 +31,44 @@ class LoginViewController: UIViewController {
         destinationVC.signupViewControllerDelegate = self
     }
     
+    func loginToServer(email: String, password: String) {
+        let loginURLString = baseURLString + "/login"
+        guard let loginURL = URL(string: loginURLString) else { return }
+        
+        let loginPostString = "email=\(email)&password=\(password)"
+        guard let loginBody = loginPostString.data(using: .utf8) else { return }
+        
+        do {
+            try request.post(url: loginURL, body: loginBody) {
+                (data, response, error) -> Void in
+                guard let httpResponse = response as? HTTPURLResponse else { return }
+                switch httpResponse.statusCode {
+                case 200:
+                    // 성공
+                    self.presentTableView()
+                case 401:
+                    let title = "알림"
+                    let message = "Code: \(httpResponse.statusCode)\n" + "Message: unauthorized\n"
+                    let ac = UIAlertController(title: title, message: message, preferredStyle: .alert)
+                    
+                    let okayAction = UIAlertAction(title: "확인", style: .default) { (action) -> Void in
+                        ac.dismiss(animated: true, completion: nil)
+                    }
+                    ac.addAction(okayAction)
+                    
+                    self.present(ac, animated: true, completion: nil)
+                default:
+                    print(httpResponse.statusCode)
+                }
+            }
+        } catch {}
+    }
+    
+    func presentTableView() {
+        guard let tc = storyboard?.instantiateViewController(
+            withIdentifier: "ImageBoardTableViewController") as? ImageBoardTableViewController else { return }
+        present(tc, animated: true, completion: nil)
+    }
 }
 
 extension LoginViewController: SignupViewControllerDelegate {
