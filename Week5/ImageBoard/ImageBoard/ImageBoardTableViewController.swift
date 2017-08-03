@@ -62,7 +62,7 @@ extension ImageBoardTableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ImageBoardCell",
                                                  for: indexPath) as? ImageBoardCell ?? ImageBoardCell()
         
-        cell.imageview.image = getImageFromURL(imageURLString: articleInfo[indexPath.row].thumb_image_url)
+        cell.imageview.image = getImageFromURL(imageURLString: articleInfo[indexPath.row].thumb_image_url) ?? nil
         cell.titleLabel.text = articleInfo[indexPath.row].image_title ?? ""
         cell.imageDescLabel.text = articleInfo[indexPath.row].image_desc ?? ""
         cell.dateLabel.text = String(describing: articleInfo[indexPath.row].created_at)
@@ -72,13 +72,14 @@ extension ImageBoardTableViewController {
 }
 
 extension ImageBoardTableViewController {
-    func getImageFromURL(imageURLString: String?) -> UIImage {
+    func getImageFromURL(imageURLString: String?) -> UIImage? {
         var resultImage = UIImage()
         let session: URLSession = {
             let config = URLSessionConfiguration.default
             return URLSession(configuration: config)
         }()
-        guard let imageURL = URL(string: imageURLString ?? "") else { return UIImage() }
+        guard let imageURLString = imageURLString else { return nil }
+        guard let imageURL = URL(string: imageURLString + baseURLString) else { return UIImage() }
         let request = URLRequest(url: imageURL)
         
         let task = session.dataTask(with: request) {
